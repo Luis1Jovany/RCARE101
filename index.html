@@ -6,239 +6,224 @@
 <title>RCARE-101 Learning Lab</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.19.0/dist/tabler-icons.min.css" />
 <style>
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-:root {
-  --bg: #ffffff; --bg2: #f5f5f3; --bg3: #eeede8;
-  --text: #1a1a18; --text2: #5f5e5a; --text3: #888780;
-  --border: rgba(0,0,0,0.12); --border2: rgba(0,0,0,0.25);
-  --radius-md: 8px; --radius-lg: 12px; --radius-xl: 16px;
-  --purple: #534AB7; --purple-light: #EEEDFE; --purple-dark: #3C3489;
-  --teal: #0F6E56; --teal-light: #E1F5EE; --teal-dark: #085041;
-  --coral: #993C1D; --coral-light: #FAECE7;
-  --amber: #854F0B; --amber-light: #FAEEDA;
-  --green: #1D9E75; --red: #D85A30; --red-light: #FAECE7;
-  --blue: #185FA5; --blue-light: #E6F1FB;
-  --pink: #993556; --pink-light: #FBEAF0;
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#fff;--bg2:#f5f5f3;--bg3:#eeede8;
+  --text:#1a1a18;--text2:#5f5e5a;--text3:#888780;
+  --border:rgba(0,0,0,.12);--border2:rgba(0,0,0,.25);
+  --r-md:8px;--r-lg:12px;
+  --purple:#534AB7;--pl:#EEEDFE;--pd:#3C3489;
+  --teal:#0F6E56;--tl:#E1F5EE;--td:#085041;
+  --coral:#993C1D;--cl:#FAECE7;
+  --amber:#854F0B;--al:#FAEEDA;
+  --green:#1D9E75;--red:#D85A30;--rl:#FAECE7;
+  --blue:#185FA5;--bl:#E6F1FB;
+  --pink:#993556;--pkl:#FBEAF0;
 }
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg: #1e1e1c; --bg2: #272724; --bg3: #303030;
-    --text: #f0efe8; --text2: #b4b2a9; --text3: #888780;
-    --border: rgba(255,255,255,0.12); --border2: rgba(255,255,255,0.25);
-    --purple: #9490e0; --purple-light: #26215C; --purple-dark: #CECBF6;
-    --teal: #5DCAA5; --teal-light: #04342C; --teal-dark: #9FE1CB;
-    --coral: #F0997B; --coral-light: #4A1B0C;
-    --amber: #FAC775; --amber-light: #412402;
-    --green: #5DCAA5; --red: #F0997B; --red-light: #4A1B0C;
-    --blue: #85B7EB; --blue-light: #042C53;
-    --pink: #ED93B1; --pink-light: #4B1528;
-  }
-}
-html, body { background: var(--bg3); color: var(--text); font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 16px; line-height: 1.6; min-height: 100vh; }
-#app { max-width: 660px; margin: 0 auto; padding: 1.5rem 1rem 5rem; }
-.screen { display: none; }
-.screen.active { display: block; }
-
-/* ── HOME ── */
-.hero { text-align: center; padding: 2rem 1rem 1.5rem; }
-.hero-icon { font-size: 42px; color: var(--purple); margin-bottom: 10px; }
-.hero h1 { font-size: 24px; font-weight: 700; color: var(--text); margin-bottom: 4px; }
-.hero .sub { font-size: 13px; color: var(--text2); margin-bottom: 6px; }
-.hero .inst { font-size: 12px; color: var(--text3); margin-bottom: 1.5rem; }
-.mode-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-.mode-card { background: var(--bg); border: 0.5px solid var(--border); border-radius: var(--radius-lg); padding: 1.1rem 1rem; cursor: pointer; text-align: left; transition: border-color 0.15s, transform 0.1s; user-select: none; }
-.mode-card:hover { border-color: var(--border2); transform: translateY(-1px); }
-.mode-card:active { transform: scale(0.98); }
-.mc-icon { font-size: 24px; margin-bottom: 8px; display: block; }
-.mc-title { font-size: 14px; font-weight: 600; color: var(--text); margin-bottom: 2px; }
-.mc-desc { font-size: 11px; color: var(--text2); line-height: 1.4; }
-.mc-purple .mc-icon { color: var(--purple); }
-.mc-teal .mc-icon { color: var(--teal); }
-.mc-amber .mc-icon { color: var(--amber); }
-.mc-coral .mc-icon { color: var(--coral); }
-.mc-blue .mc-icon { color: var(--blue); }
-.mc-pink .mc-icon { color: var(--pink); }
-.section-label { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text3); margin: 1.5rem 0 8px; }
-
-/* ── TOP BAR ── */
-.top-bar { display: flex; align-items: center; gap: 10px; margin-bottom: 1.25rem; }
-.back-btn { background: var(--bg); border: 0.5px solid var(--border); border-radius: var(--radius-md); padding: 7px 14px; font-size: 13px; cursor: pointer; color: var(--text2); white-space: nowrap; display: flex; align-items: center; gap: 4px; }
-.back-btn:hover { background: var(--bg2); }
-.progress-bar { flex: 1; height: 6px; background: var(--bg3); border-radius: 3px; overflow: hidden; }
-.progress-fill { height: 100%; background: var(--purple); border-radius: 3px; transition: width 0.3s; }
-.progress-label { font-size: 12px; color: var(--text3); white-space: nowrap; }
-.screen-title { font-size: 15px; font-weight: 600; color: var(--text); }
-
-/* ── FLASHCARDS ── */
-.fc-hint { text-align: center; font-size: 12px; color: var(--text3); margin-bottom: 1rem; }
-.flashcard-wrap { perspective: 1000px; margin-bottom: 1.25rem; cursor: pointer; }
-.flashcard { width: 100%; min-height: 220px; position: relative; transform-style: preserve-3d; transition: transform 0.4s ease; border-radius: var(--radius-lg); }
-.flashcard.flipped { transform: rotateY(180deg); }
-.card-face { position: absolute; width: 100%; min-height: 220px; backface-visibility: hidden; border-radius: var(--radius-lg); border: 0.5px solid var(--border); display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 2rem 1.5rem; text-align: center; background: var(--bg); }
-.card-back { transform: rotateY(180deg); }
-.card-tag { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text3); margin-bottom: 12px; }
-.card-q { font-size: 16px; color: var(--text); line-height: 1.5; }
-.card-a { font-size: 17px; font-weight: 600; color: var(--purple); line-height: 1.4; }
-.card-hint-txt { font-size: 12px; color: var(--text3); margin-top: 10px; }
-.card-actions { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; }
-.btn { border: 0.5px solid var(--border); background: var(--bg); border-radius: var(--radius-md); padding: 9px 18px; font-size: 13px; cursor: pointer; color: var(--text); display: inline-flex; align-items: center; gap: 5px; transition: background 0.1s; }
-.btn:hover { background: var(--bg2); }
-.btn:active { transform: scale(0.97); }
-.btn-good { border-color: var(--green); color: var(--teal); }
-.btn-good:hover { background: var(--teal-light); }
-.btn-bad { border-color: var(--red); color: var(--coral); }
-.btn-bad:hover { background: var(--red-light); }
-.btn-primary { border-color: var(--purple); color: var(--purple); }
-.btn-primary:hover { background: var(--purple-light); }
-.done-card { text-align: center; padding: 2.5rem 1rem; background: var(--bg); border: 0.5px solid var(--border); border-radius: var(--radius-lg); }
-.done-card h2 { font-size: 20px; font-weight: 600; margin-bottom: 8px; color: var(--text); }
-.done-card p { font-size: 14px; color: var(--text2); margin-bottom: 1.5rem; }
-
-/* ── QUIZ / SCENARIO ── */
-.cat-badge { display: inline-block; font-size: 11px; font-weight: 600; padding: 3px 10px; border-radius: var(--radius-md); background: var(--purple-light); color: var(--purple-dark); margin-bottom: 10px; }
-.step-badge { display: inline-block; font-size: 11px; font-weight: 600; padding: 3px 10px; border-radius: var(--radius-md); background: var(--amber-light); color: var(--amber); margin-bottom: 10px; }
-.q-box { background: var(--bg2); border-radius: var(--radius-md); padding: 1rem 1.25rem; font-size: 15px; color: var(--text); line-height: 1.6; margin-bottom: 1.1rem; }
-.options-grid { display: grid; gap: 8px; }
-.option-btn { border: 0.5px solid var(--border); background: var(--bg); border-radius: var(--radius-md); padding: 12px 16px; font-size: 14px; cursor: pointer; text-align: left; color: var(--text); line-height: 1.4; transition: border-color 0.12s; }
-.option-btn:hover:not(:disabled) { border-color: var(--purple); }
-.option-btn.correct { border-color: var(--green); background: var(--teal-light); color: var(--teal-dark); }
-.option-btn.wrong { border-color: var(--red); background: var(--red-light); color: var(--coral); }
-.option-btn:disabled { cursor: default; }
-.explanation { margin-top: 12px; padding: 12px 16px; font-size: 13px; line-height: 1.65; color: var(--text2); background: var(--bg2); border-left: 3px solid var(--purple); border-radius: 0 var(--radius-md) var(--radius-md) 0; }
-.next-btn { margin-top: 14px; border: 0.5px solid var(--purple); background: none; border-radius: var(--radius-md); padding: 10px 22px; font-size: 14px; cursor: pointer; color: var(--purple); }
-.next-btn:hover { background: var(--purple-light); }
-
-/* ── SCENARIO ── */
-.scenario-box { background: var(--bg2); border-radius: var(--radius-lg); padding: 1.1rem; margin-bottom: 1.1rem; }
-.scenario-label { font-size: 11px; font-weight: 600; color: var(--text3); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 6px; }
-.scenario-story { font-size: 14px; color: var(--text); line-height: 1.65; margin-bottom: 10px; }
-.vitals-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; margin-top: 8px; }
-.vital-chip { background: var(--bg); border: 0.5px solid var(--border); border-radius: var(--radius-md); padding: 7px 10px; font-size: 11px; color: var(--text2); }
-.vital-chip span { display: block; font-size: 13px; font-weight: 600; color: var(--text); }
-.vital-chip.abnormal { border-color: var(--red); background: var(--red-light); }
-.vital-chip.abnormal span { color: var(--coral); }
-
-/* ── SCORE ── */
-.score-screen { text-align: center; padding: 2rem 1rem; }
-.score-ring { width: 110px; height: 110px; margin: 0 auto 1.5rem; position: relative; }
-.score-ring svg { width: 100%; height: 100%; }
-.score-num { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); font-size: 22px; font-weight: 700; color: var(--text); }
-.score-screen h2 { font-size: 20px; font-weight: 600; color: var(--text); margin-bottom: 8px; }
-.score-screen p { font-size: 14px; color: var(--text2); margin-bottom: 2rem; }
-.score-btns { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
-
-/* ── REFERENCE ── */
-.ref-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
-.vr-card { background: var(--bg); border: 0.5px solid var(--border); border-radius: var(--radius-md); padding: 10px 14px; }
-.vr-name { font-size: 12px; color: var(--text2); margin-bottom: 2px; }
-.vr-val { font-size: 14px; font-weight: 600; }
-.vr-ok .vr-val { color: var(--teal); }
-.vr-warn .vr-val { color: var(--amber); }
-.vr-danger .vr-val { color: var(--coral); }
-
-/* ── FILL IN BLANK ── */
-.fib-input { width: 100%; border: 0.5px solid var(--border2); background: var(--bg); border-radius: var(--radius-md); padding: 10px 14px; font-size: 15px; color: var(--text); margin-bottom: 8px; outline: none; font-family: inherit; }
-.fib-input:focus { border-color: var(--purple); }
-.fib-input.correct-input { border-color: var(--green); background: var(--teal-light); }
-.fib-input.wrong-input { border-color: var(--red); background: var(--red-light); }
-.check-btn { border: 0.5px solid var(--purple); background: none; border-radius: var(--radius-md); padding: 9px 20px; font-size: 14px; cursor: pointer; color: var(--purple); }
-.check-btn:hover { background: var(--purple-light); }
-.fib-hint { font-size: 12px; color: var(--text3); margin-bottom: 6px; }
-.show-ans-btn { font-size: 12px; color: var(--text3); background: none; border: none; cursor: pointer; text-decoration: underline; margin-left: 8px; }
-
-/* ── FORMULA BUILDER ── */
-.formula-card { background: var(--bg); border: 0.5px solid var(--border); border-radius: var(--radius-lg); padding: 1.25rem; margin-bottom: 12px; }
-.formula-name { font-size: 13px; font-weight: 600; color: var(--text3); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 6px; }
-.formula-display { font-size: 22px; font-weight: 700; color: var(--purple); margin-bottom: 12px; font-family: 'Georgia', serif; }
-.formula-inputs { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 10px; }
-.formula-field { display: flex; flex-direction: column; gap: 3px; }
-.formula-field label { font-size: 11px; color: var(--text2); }
-.formula-field input { border: 0.5px solid var(--border2); background: var(--bg2); border-radius: var(--radius-md); padding: 7px 10px; font-size: 14px; color: var(--text); outline: none; font-family: inherit; }
-.formula-field input:focus { border-color: var(--purple); }
-.formula-result { background: var(--purple-light); border-radius: var(--radius-md); padding: 10px 14px; font-size: 16px; font-weight: 600; color: var(--purple-dark); min-height: 44px; display: flex; align-items: center; }
-
-/* ── MATCHER ── */
-.matcher-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 16px; }
-.match-col { display: flex; flex-direction: column; gap: 8px; }
-.match-item { border: 0.5px solid var(--border); background: var(--bg); border-radius: var(--radius-md); padding: 10px 14px; font-size: 13px; cursor: pointer; color: var(--text); text-align: center; line-height: 1.4; transition: border-color 0.12s, background 0.12s; user-select: none; }
-.match-item:hover { border-color: var(--border2); }
-.match-item.selected { border-color: var(--purple); background: var(--purple-light); color: var(--purple-dark); }
-.match-item.matched-ok { border-color: var(--green); background: var(--teal-light); color: var(--teal-dark); cursor: default; }
-.match-item.matched-err { border-color: var(--red); background: var(--red-light); color: var(--coral); }
-
-/* ── TIPS PAGE ── */
-.tip-card { background: var(--bg); border: 0.5px solid var(--border); border-radius: var(--radius-lg); padding: 1.1rem 1.25rem; margin-bottom: 10px; }
-.tip-icon { font-size: 20px; margin-bottom: 6px; display: block; }
-.tip-title { font-size: 14px; font-weight: 600; color: var(--text); margin-bottom: 4px; }
-.tip-body { font-size: 13px; color: var(--text2); line-height: 1.6; }
-.tip-body code { background: var(--bg2); border-radius: 4px; padding: 1px 5px; font-size: 12px; color: var(--purple); }
-
-/* ── VITALS TABLE ── */
-.vs-table { width: 100%; border-collapse: collapse; font-size: 13px; background: var(--bg); border-radius: var(--radius-lg); overflow: hidden; border: 0.5px solid var(--border); margin-bottom: 10px; }
-.vs-table th { background: var(--bg2); padding: 9px 12px; text-align: left; font-weight: 600; color: var(--text); border-bottom: 0.5px solid var(--border); }
-.vs-table td { padding: 8px 12px; border-bottom: 0.5px solid var(--border); color: var(--text2); vertical-align: top; }
-.vs-table tr:last-child td { border-bottom: none; }
-.vs-table td:first-child { font-weight: 600; color: var(--text); white-space: nowrap; }
-
-/* ── ABG INTERPRETER ── */
-.abg-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 12px; }
-.abg-field { display: flex; flex-direction: column; gap: 3px; }
-.abg-field label { font-size: 12px; color: var(--text2); font-weight: 500; }
-.abg-field input { border: 0.5px solid var(--border2); background: var(--bg2); border-radius: var(--radius-md); padding: 9px 12px; font-size: 15px; color: var(--text); outline: none; font-family: inherit; }
-.abg-field input:focus { border-color: var(--purple); }
-.abg-result { border-radius: var(--radius-lg); padding: 1rem 1.25rem; margin-top: 12px; background: var(--bg2); border: 0.5px solid var(--border); }
-.abg-result .label { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text3); margin-bottom: 4px; }
-.abg-result .verdict { font-size: 18px; font-weight: 700; margin-bottom: 6px; }
-.abg-result .explain { font-size: 13px; color: var(--text2); line-height: 1.6; }
-.abg-normal { color: var(--teal); }
-.abg-acid { color: var(--coral); }
-.abg-alk { color: var(--blue); }
-
-@media (max-width: 480px) {
-  .vitals-grid { grid-template-columns: repeat(2,1fr); }
-  .abg-grid { grid-template-columns: 1fr; }
-  .formula-inputs { grid-template-columns: 1fr; }
-  .matcher-wrap { grid-template-columns: 1fr; }
+@media(prefers-color-scheme:dark){:root{
+  --bg:#1e1e1c;--bg2:#272724;--bg3:#303030;
+  --text:#f0efe8;--text2:#b4b2a9;--text3:#888780;
+  --border:rgba(255,255,255,.12);--border2:rgba(255,255,255,.25);
+  --purple:#9490e0;--pl:#26215C;--pd:#CECBF6;
+  --teal:#5DCAA5;--tl:#04342C;--td:#9FE1CB;
+  --coral:#F0997B;--cl:#4A1B0C;
+  --amber:#FAC775;--al:#412402;
+  --green:#5DCAA5;--red:#F0997B;--rl:#4A1B0C;
+  --blue:#85B7EB;--bl:#042C53;
+  --pink:#ED93B1;--pkl:#4B1528;
+}}
+html,body{background:var(--bg3);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;font-size:16px;line-height:1.6;min-height:100vh}
+#app{max-width:660px;margin:0 auto;padding:1.5rem 1rem 5rem}
+.screen{display:none}.screen.active{display:block}
+ 
+/* HOME */
+.hero{text-align:center;padding:2rem 1rem 1.5rem}
+.hero-icon{font-size:42px;color:var(--purple);margin-bottom:10px}
+.hero h1{font-size:24px;font-weight:700;margin-bottom:4px}
+.hero .sub{font-size:13px;color:var(--text2);margin-bottom:4px}
+.hero .inst{font-size:12px;color:var(--text3);margin-bottom:1.5rem}
+.section-label{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--text3);margin:1.5rem 0 8px}
+.mode-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.mode-card{background:var(--bg);border:.5px solid var(--border);border-radius:var(--r-lg);padding:1.1rem 1rem;cursor:pointer;text-align:left;transition:border-color .15s,transform .1s;user-select:none}
+.mode-card:hover{border-color:var(--border2);transform:translateY(-1px)}
+.mode-card:active{transform:scale(.98)}
+.mc-icon{font-size:24px;margin-bottom:8px;display:block}
+.mc-title{font-size:14px;font-weight:600;margin-bottom:2px}
+.mc-desc{font-size:11px;color:var(--text2);line-height:1.4}
+.mc-purple .mc-icon{color:var(--purple)}.mc-teal .mc-icon{color:var(--teal)}
+.mc-amber .mc-icon{color:var(--amber)}.mc-coral .mc-icon{color:var(--coral)}
+.mc-blue .mc-icon{color:var(--blue)}.mc-pink .mc-icon{color:var(--pink)}
+ 
+/* TOP BAR */
+.top-bar{display:flex;align-items:center;gap:10px;margin-bottom:1.25rem}
+.back-btn{background:var(--bg);border:.5px solid var(--border);border-radius:var(--r-md);padding:7px 14px;font-size:13px;cursor:pointer;color:var(--text2);white-space:nowrap;display:flex;align-items:center;gap:4px}
+.back-btn:hover{background:var(--bg2)}
+.progress-bar{flex:1;height:6px;background:var(--bg3);border-radius:3px;overflow:hidden}
+.progress-fill{height:100%;background:var(--purple);border-radius:3px;transition:width .3s}
+.progress-label{font-size:12px;color:var(--text3);white-space:nowrap}
+.screen-title{font-size:15px;font-weight:600}
+ 
+/* FLASHCARD */
+.fc-hint{text-align:center;font-size:12px;color:var(--text3);margin-bottom:1rem}
+.flashcard-wrap{perspective:1000px;margin-bottom:1.25rem;cursor:pointer}
+.flashcard{width:100%;min-height:220px;position:relative;transform-style:preserve-3d;transition:transform .4s;border-radius:var(--r-lg)}
+.flashcard.flipped{transform:rotateY(180deg)}
+.card-face{position:absolute;width:100%;min-height:220px;backface-visibility:hidden;border-radius:var(--r-lg);border:.5px solid var(--border);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:2rem 1.5rem;text-align:center;background:var(--bg)}
+.card-back{transform:rotateY(180deg)}
+.card-tag{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--text3);margin-bottom:12px}
+.card-q{font-size:16px;line-height:1.5}
+.card-a{font-size:17px;font-weight:600;color:var(--purple);line-height:1.4}
+.card-hint-txt{font-size:12px;color:var(--text3);margin-top:10px}
+.card-actions{display:flex;gap:8px;justify-content:center;flex-wrap:wrap}
+.btn{border:.5px solid var(--border);background:var(--bg);border-radius:var(--r-md);padding:9px 18px;font-size:13px;cursor:pointer;color:var(--text);display:inline-flex;align-items:center;gap:5px;transition:background .1s}
+.btn:hover{background:var(--bg2)}.btn:active{transform:scale(.97)}
+.btn-good{border-color:var(--green);color:var(--teal)}.btn-good:hover{background:var(--tl)}
+.btn-bad{border-color:var(--red);color:var(--coral)}.btn-bad:hover{background:var(--rl)}
+.btn-primary{border-color:var(--purple);color:var(--purple)}.btn-primary:hover{background:var(--pl)}
+.done-card{text-align:center;padding:2.5rem 1rem;background:var(--bg);border:.5px solid var(--border);border-radius:var(--r-lg)}
+.done-card h2{font-size:20px;font-weight:600;margin-bottom:8px}
+.done-card p{font-size:14px;color:var(--text2);margin-bottom:1.5rem}
+ 
+/* QUIZ / SCENARIO */
+.cat-badge{display:inline-block;font-size:11px;font-weight:600;padding:3px 10px;border-radius:var(--r-md);background:var(--pl);color:var(--pd);margin-bottom:10px}
+.step-badge{display:inline-block;font-size:11px;font-weight:600;padding:3px 10px;border-radius:var(--r-md);background:var(--al);color:var(--amber);margin-bottom:10px}
+.q-box{background:var(--bg2);border-radius:var(--r-md);padding:1rem 1.25rem;font-size:15px;line-height:1.6;margin-bottom:1.1rem}
+.options-grid{display:grid;gap:8px}
+.option-btn{border:.5px solid var(--border);background:var(--bg);border-radius:var(--r-md);padding:12px 16px;font-size:14px;cursor:pointer;text-align:left;line-height:1.4;transition:border-color .12s}
+.option-btn:hover:not(:disabled){border-color:var(--purple)}
+.option-btn.correct{border-color:var(--green);background:var(--tl);color:var(--td)}
+.option-btn.wrong{border-color:var(--red);background:var(--rl);color:var(--coral)}
+.option-btn:disabled{cursor:default}
+.explanation{margin-top:12px;padding:12px 16px;font-size:13px;line-height:1.65;color:var(--text2);background:var(--bg2);border-left:3px solid var(--purple);border-radius:0 var(--r-md) var(--r-md) 0}
+.next-btn{margin-top:14px;border:.5px solid var(--purple);background:none;border-radius:var(--r-md);padding:10px 22px;font-size:14px;cursor:pointer;color:var(--purple)}
+.next-btn:hover{background:var(--pl)}
+ 
+/* SCENARIO */
+.scenario-box{background:var(--bg2);border-radius:var(--r-lg);padding:1.1rem;margin-bottom:1.1rem}
+.scenario-label{font-size:11px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px}
+.scenario-story{font-size:14px;line-height:1.65;margin-bottom:10px}
+.vitals-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:8px}
+.vital-chip{background:var(--bg);border:.5px solid var(--border);border-radius:var(--r-md);padding:7px 10px;font-size:11px;color:var(--text2)}
+.vital-chip span{display:block;font-size:13px;font-weight:600}
+.vital-chip.abn{border-color:var(--red);background:var(--rl)}.vital-chip.abn span{color:var(--coral)}
+ 
+/* SCORE */
+.score-screen{text-align:center;padding:2rem 1rem}
+.score-ring{width:110px;height:110px;margin:0 auto 1.5rem;position:relative}
+.score-ring svg{width:100%;height:100%}
+.score-num{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:22px;font-weight:700}
+.score-screen h2{font-size:20px;font-weight:600;margin-bottom:8px}
+.score-screen p{font-size:14px;color:var(--text2);margin-bottom:2rem}
+.score-btns{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+ 
+/* REFERENCE */
+.ref-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.vr-card{background:var(--bg);border:.5px solid var(--border);border-radius:var(--r-md);padding:10px 14px}
+.vr-name{font-size:12px;color:var(--text2);margin-bottom:2px}
+.vr-val{font-size:14px;font-weight:600}
+.vr-ok .vr-val{color:var(--teal)}.vr-warn .vr-val{color:var(--amber)}.vr-danger .vr-val{color:var(--coral)}
+ 
+/* FILL IN BLANK */
+.fib-input{width:100%;border:.5px solid var(--border2);background:var(--bg);border-radius:var(--r-md);padding:10px 14px;font-size:15px;color:var(--text);margin-bottom:8px;outline:none;font-family:inherit}
+.fib-input:focus{border-color:var(--purple)}
+.fib-input.ok{border-color:var(--green);background:var(--tl)}
+.fib-input.err{border-color:var(--red);background:var(--rl)}
+.check-btn{border:.5px solid var(--purple);background:none;border-radius:var(--r-md);padding:9px 20px;font-size:14px;cursor:pointer;color:var(--purple)}
+.check-btn:hover{background:var(--pl)}
+.fib-hint{font-size:12px;color:var(--text3);margin-bottom:6px}
+.show-ans{font-size:12px;color:var(--text3);background:none;border:none;cursor:pointer;text-decoration:underline;margin-left:8px}
+ 
+/* FORMULA */
+.formula-card{background:var(--bg);border:.5px solid var(--border);border-radius:var(--r-lg);padding:1.25rem;margin-bottom:12px}
+.formula-name{font-size:13px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:.05em;margin-bottom:6px}
+.formula-display{font-size:20px;font-weight:700;color:var(--purple);margin-bottom:12px;font-family:Georgia,serif}
+.formula-inputs{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px}
+.ff{display:flex;flex-direction:column;gap:3px}
+.ff label{font-size:11px;color:var(--text2)}
+.ff input,.ff select{border:.5px solid var(--border2);background:var(--bg2);border-radius:var(--r-md);padding:7px 10px;font-size:14px;color:var(--text);outline:none;font-family:inherit}
+.ff input:focus,.ff select:focus{border-color:var(--purple)}
+.formula-result{background:var(--pl);border-radius:var(--r-md);padding:10px 14px;font-size:15px;font-weight:600;color:var(--pd);min-height:44px;display:flex;align-items:center}
+ 
+/* MATCHER */
+.matcher-wrap{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px}
+.match-col{display:flex;flex-direction:column;gap:8px}
+.match-item{border:.5px solid var(--border);background:var(--bg);border-radius:var(--r-md);padding:10px 14px;font-size:13px;cursor:pointer;text-align:center;line-height:1.4;transition:border-color .12s,background .12s;user-select:none}
+.match-item:hover{border-color:var(--border2)}
+.match-item.sel{border-color:var(--purple);background:var(--pl);color:var(--pd)}
+.match-item.mok{border-color:var(--green);background:var(--tl);color:var(--td);cursor:default}
+.match-item.merr{border-color:var(--red);background:var(--rl);color:var(--coral)}
+ 
+/* TIPS */
+.tip-card{background:var(--bg);border:.5px solid var(--border);border-radius:var(--r-lg);padding:1.1rem 1.25rem;margin-bottom:10px}
+.tip-icon{font-size:20px;margin-bottom:6px;display:block}
+.tip-title{font-size:14px;font-weight:600;margin-bottom:4px}
+.tip-body{font-size:13px;color:var(--text2);line-height:1.6}
+.tip-body code{background:var(--bg2);border-radius:4px;padding:1px 5px;font-size:12px;color:var(--purple)}
+ 
+/* VITALS TABLE */
+.vs-table{width:100%;border-collapse:collapse;font-size:13px;background:var(--bg);border-radius:var(--r-lg);overflow:hidden;border:.5px solid var(--border);margin-bottom:10px}
+.vs-table th{background:var(--bg2);padding:9px 12px;text-align:left;font-weight:600;border-bottom:.5px solid var(--border)}
+.vs-table td{padding:8px 12px;border-bottom:.5px solid var(--border);color:var(--text2);vertical-align:top}
+.vs-table tr:last-child td{border-bottom:none}
+.vs-table td:first-child{font-weight:600;color:var(--text);white-space:nowrap}
+ 
+/* ABG */
+.abg-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px}
+.abg-field{display:flex;flex-direction:column;gap:3px}
+.abg-field label{font-size:12px;color:var(--text2);font-weight:500}
+.abg-field input{border:.5px solid var(--border2);background:var(--bg2);border-radius:var(--r-md);padding:9px 12px;font-size:15px;color:var(--text);outline:none;font-family:inherit}
+.abg-field input:focus{border-color:var(--purple)}
+.abg-result-box{border-radius:var(--r-lg);padding:1rem 1.25rem;margin-top:12px;background:var(--bg2);border:.5px solid var(--border)}
+.abg-label{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--text3);margin-bottom:4px}
+.abg-verdict{font-size:18px;font-weight:700;margin-bottom:8px}
+.abg-explain{font-size:13px;color:var(--text2);line-height:1.65}
+.c-normal{color:var(--teal)}.c-acid{color:var(--coral)}.c-alk{color:var(--blue)}
+ 
+@media(max-width:480px){
+  .vitals-grid{grid-template-columns:repeat(2,1fr)}
+  .abg-grid{grid-template-columns:1fr}
+  .formula-inputs{grid-template-columns:1fr}
+  .matcher-wrap{grid-template-columns:1fr}
 }
 </style>
 </head>
 <body>
 <div id="app">
-
+ 
 <!-- HOME -->
 <div id="home-screen" class="screen active">
   <div class="hero">
     <div class="hero-icon"><i class="ti ti-lungs"></i></div>
     <h1>RCARE-101 Learning Lab</h1>
-    <p class="sub">Respiratory Therapy · Fresno City College</p>
-    <p class="inst">7 modes · all topics from your handouts · built-in study techniques</p>
+    <p class="sub">Respiratory Therapy &middot;Fresno City College</p>
+    <p class="inst">10 modes &middot; all handout content &middot; evidence-based study techniques</p>
   </div>
   <p class="section-label">Master the content</p>
   <div class="mode-grid">
     <div class="mode-card mc-purple" onclick="startFlashcards()">
       <i class="ti ti-cards mc-icon"></i>
       <div class="mc-title">Flashcards</div>
-      <div class="mc-desc">All concepts — values, formulas, vitals, ABGs, labs</div>
+      <div class="mc-desc">All values, formulas, vitals, ABGs &amp; labs</div>
     </div>
     <div class="mode-card mc-teal" onclick="startQuiz()">
       <i class="ti ti-brain mc-icon"></i>
       <div class="mc-title">MCQ Quiz</div>
-      <div class="mc-desc">NBRC-style clinical multiple choice with explanations</div>
+      <div class="mc-desc">NBRC-style clinical questions with explanations</div>
     </div>
     <div class="mode-card mc-amber" onclick="startScenario()">
       <i class="ti ti-stethoscope mc-icon"></i>
       <div class="mc-title">Clinical cases</div>
-      <div class="mc-desc">Full patient scenarios with vitals and ABG reasoning</div>
+      <div class="mc-desc">Patient scenarios — assess, interpret, decide</div>
     </div>
     <div class="mode-card mc-blue" onclick="startFIB()">
       <i class="ti ti-pencil mc-icon"></i>
       <div class="mc-title">Fill in the blank</div>
-      <div class="mc-desc">Type the value or formula — active recall training</div>
+      <div class="mc-desc">Type values &amp; formulas — active recall</div>
     </div>
     <div class="mode-card mc-coral" onclick="startFormulas()">
       <i class="ti ti-math mc-icon"></i>
       <div class="mc-title">Formula calculator</div>
-      <div class="mc-desc">Practice every calculation with live feedback</div>
+      <div class="mc-desc">Every calculation with live feedback</div>
     </div>
     <div class="mode-card mc-pink" onclick="startMatcher()">
       <i class="ti ti-arrows-left-right mc-icon"></i>
@@ -246,12 +231,12 @@ html, body { background: var(--bg3); color: var(--text); font-family: -apple-sys
       <div class="mc-desc">Match ABG findings to conditions</div>
     </div>
   </div>
-  <p class="section-label">Tools</p>
+  <p class="section-label">Tools &amp; Reference</p>
   <div class="mode-grid">
     <div class="mode-card mc-teal" onclick="startABG()">
       <i class="ti ti-activity mc-icon"></i>
       <div class="mc-title">ABG interpreter</div>
-      <div class="mc-desc">Enter any ABG and get instant step-by-step interpretation</div>
+      <div class="mc-desc">Enter any ABG &rarr; instant 4-step interpretation</div>
     </div>
     <div class="mode-card mc-purple" onclick="showRef()">
       <i class="ti ti-clipboard-list mc-icon"></i>
@@ -261,7 +246,7 @@ html, body { background: var(--bg3); color: var(--text); font-family: -apple-sys
     <div class="mode-card mc-amber" onclick="showVitals()">
       <i class="ti ti-heart-rate mc-icon"></i>
       <div class="mc-title">Vital signs guide</div>
-      <div class="mc-desc">Full vitals overview with abnormal triggers</div>
+      <div class="mc-desc">Full vitals table with abnormal triggers</div>
     </div>
     <div class="mode-card mc-blue" onclick="showTips()">
       <i class="ti ti-bulb mc-icon"></i>
@@ -270,7 +255,7 @@ html, body { background: var(--bg3); color: var(--text); font-family: -apple-sys
     </div>
   </div>
 </div>
-
+ 
 <!-- FLASHCARDS -->
 <div id="flash-screen" class="screen">
   <div class="top-bar">
@@ -278,7 +263,7 @@ html, body { background: var(--bg3); color: var(--text); font-family: -apple-sys
     <div class="progress-bar"><div class="progress-fill" id="flash-progress"></div></div>
     <span class="progress-label" id="flash-counter"></span>
   </div>
-  <p class="fc-hint" id="fc-hint-txt">Tap the card to reveal the answer</p>
+  <p class="fc-hint" id="fc-hint">Tap the card to reveal the answer</p>
   <div class="flashcard-wrap" id="fc-wrap" onclick="flipCard()">
     <div class="flashcard" id="flashcard">
       <div class="card-face">
@@ -292,21 +277,21 @@ html, body { background: var(--bg3); color: var(--text); font-family: -apple-sys
       </div>
     </div>
   </div>
-  <div class="card-actions" id="fc-actions" style="display:none;">
+  <div class="card-actions" id="fc-actions" style="display:none">
     <button class="btn btn-bad" onclick="fcGrade(false)"><i class="ti ti-x"></i> Again</button>
     <button class="btn" onclick="fcSkip()">Skip</button>
     <button class="btn btn-good" onclick="fcGrade(true)"><i class="ti ti-check"></i> Got it</button>
   </div>
-  <div id="fc-done" style="display:none;" class="done-card">
+  <div id="fc-done" style="display:none" class="done-card">
     <h2>Deck complete!</h2>
     <p id="fc-summary"></p>
-    <div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap;">
-      <button class="btn btn-primary" onclick="restartFlash()">Review again</button>
+    <div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap">
+      <button class="btn btn-primary" onclick="startFlashcards()">Review again</button>
       <button class="btn" onclick="goHome()">Main menu</button>
     </div>
   </div>
 </div>
-
+ 
 <!-- QUIZ -->
 <div id="quiz-screen" class="screen">
   <div class="top-bar">
@@ -314,24 +299,14 @@ html, body { background: var(--bg3); color: var(--text); font-family: -apple-sys
     <div class="progress-bar"><div class="progress-fill" id="quiz-progress"></div></div>
     <span class="progress-label" id="quiz-counter"></span>
   </div>
-  <div id="quiz-q-area"></div>
-  <div id="quiz-done" class="score-screen" style="display:none;">
-    <div class="score-ring">
-      <svg viewBox="0 0 100 100" role="img" aria-label="Score ring">
-        <circle cx="50" cy="50" r="44" fill="none" stroke="var(--bg3)" stroke-width="9"/>
-        <circle cx="50" cy="50" r="44" fill="none" stroke="var(--purple)" stroke-width="9" stroke-linecap="round" stroke-dasharray="276.46" id="score-arc" stroke-dashoffset="276.46" transform="rotate(-90 50 50)"/>
-      </svg>
-      <div class="score-num" id="score-pct"></div>
-    </div>
-    <h2 id="score-title"></h2>
-    <p id="score-sub"></p>
-    <div class="score-btns">
-      <button class="btn btn-primary" onclick="startQuiz()">Try again</button>
-      <button class="btn" onclick="goHome()">Main menu</button>
-    </div>
+  <div id="quiz-area"></div>
+  <div id="quiz-done" class="score-screen" style="display:none">
+    <div class="score-ring"><svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="44" fill="none" stroke="var(--bg3)" stroke-width="9"/><circle cx="50" cy="50" r="44" fill="none" stroke="var(--purple)" stroke-width="9" stroke-linecap="round" stroke-dasharray="276.46" id="q-arc" stroke-dashoffset="276.46" transform="rotate(-90 50 50)"/></svg><div class="score-num" id="q-pct"></div></div>
+    <h2 id="q-title"></h2><p id="q-sub"></p>
+    <div class="score-btns"><button class="btn btn-primary" onclick="startQuiz()">Try again</button><button class="btn" onclick="goHome()">Main menu</button></div>
   </div>
 </div>
-
+ 
 <!-- SCENARIOS -->
 <div id="scenario-screen" class="screen">
   <div class="top-bar">
@@ -340,23 +315,13 @@ html, body { background: var(--bg3); color: var(--text); font-family: -apple-sys
     <span class="progress-label" id="sc-counter"></span>
   </div>
   <div id="sc-area"></div>
-  <div id="sc-done" class="score-screen" style="display:none;">
-    <div class="score-ring">
-      <svg viewBox="0 0 100 100" role="img" aria-label="Score ring">
-        <circle cx="50" cy="50" r="44" fill="none" stroke="var(--bg3)" stroke-width="9"/>
-        <circle cx="50" cy="50" r="44" fill="none" stroke="var(--green)" stroke-width="9" stroke-linecap="round" stroke-dasharray="276.46" id="sc-arc" stroke-dashoffset="276.46" transform="rotate(-90 50 50)"/>
-      </svg>
-      <div class="score-num" id="sc-pct"></div>
-    </div>
-    <h2>Cases complete</h2>
-    <p id="sc-sub"></p>
-    <div class="score-btns">
-      <button class="btn btn-primary" onclick="startScenario()">Try again</button>
-      <button class="btn" onclick="goHome()">Main menu</button>
-    </div>
+  <div id="sc-done" class="score-screen" style="display:none">
+    <div class="score-ring"><svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="44" fill="none" stroke="var(--bg3)" stroke-width="9"/><circle cx="50" cy="50" r="44" fill="none" stroke="var(--green)" stroke-width="9" stroke-linecap="round" stroke-dasharray="276.46" id="sc-arc" stroke-dashoffset="276.46" transform="rotate(-90 50 50)"/></svg><div class="score-num" id="sc-pct"></div></div>
+    <h2>Cases complete</h2><p id="sc-sub"></p>
+    <div class="score-btns"><button class="btn btn-primary" onclick="startScenario()">Try again</button><button class="btn" onclick="goHome()">Main menu</button></div>
   </div>
 </div>
-
+ 
 <!-- FILL IN BLANK -->
 <div id="fib-screen" class="screen">
   <div class="top-bar">
@@ -365,61 +330,51 @@ html, body { background: var(--bg3); color: var(--text); font-family: -apple-sys
     <span class="progress-label" id="fib-counter"></span>
   </div>
   <div id="fib-area"></div>
-  <div id="fib-done" class="score-screen" style="display:none;">
-    <div class="score-ring">
-      <svg viewBox="0 0 100 100" role="img" aria-label="Score ring">
-        <circle cx="50" cy="50" r="44" fill="none" stroke="var(--bg3)" stroke-width="9"/>
-        <circle cx="50" cy="50" r="44" fill="none" stroke="var(--blue)" stroke-width="9" stroke-linecap="round" stroke-dasharray="276.46" id="fib-arc" stroke-dashoffset="276.46" transform="rotate(-90 50 50)"/>
-      </svg>
-      <div class="score-num" id="fib-pct"></div>
-    </div>
-    <h2>Fill-in complete!</h2>
-    <p id="fib-sub"></p>
-    <div class="score-btns">
-      <button class="btn btn-primary" onclick="startFIB()">Try again</button>
-      <button class="btn" onclick="goHome()">Main menu</button>
-    </div>
+  <div id="fib-done" class="score-screen" style="display:none">
+    <div class="score-ring"><svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="44" fill="none" stroke="var(--bg3)" stroke-width="9"/><circle cx="50" cy="50" r="44" fill="none" stroke="var(--blue)" stroke-width="9" stroke-linecap="round" stroke-dasharray="276.46" id="fib-arc" stroke-dashoffset="276.46" transform="rotate(-90 50 50)"/></svg><div class="score-num" id="fib-pct"></div></div>
+    <h2>Fill-in complete!</h2><p id="fib-sub"></p>
+    <div class="score-btns"><button class="btn btn-primary" onclick="startFIB()">Try again</button><button class="btn" onclick="goHome()">Main menu</button></div>
   </div>
 </div>
-
+ 
 <!-- FORMULAS -->
 <div id="formula-screen" class="screen">
   <div class="top-bar">
     <button class="back-btn" onclick="goHome()"><i class="ti ti-arrow-left"></i> Back</button>
     <span class="screen-title">Formula calculator</span>
   </div>
-  <p style="font-size:13px;color:var(--text2);margin-bottom:12px;">Enter values to practice each formula. Results update live.</p>
+  <p style="font-size:13px;color:var(--text2);margin-bottom:12px">Enter values to practice each formula. Results update live.</p>
   <div id="formula-area"></div>
 </div>
-
+ 
 <!-- MATCHER -->
 <div id="matcher-screen" class="screen">
   <div class="top-bar">
     <button class="back-btn" onclick="goHome()"><i class="ti ti-arrow-left"></i> Back</button>
     <span class="screen-title">Term matcher</span>
   </div>
-  <p style="font-size:13px;color:var(--text2);margin-bottom:12px;">Select a term on the left, then its match on the right.</p>
+  <p style="font-size:13px;color:var(--text2);margin-bottom:12px">Select a term on the left, then its match on the right.</p>
   <div id="matcher-area"></div>
 </div>
-
+ 
 <!-- ABG INTERPRETER -->
 <div id="abg-screen" class="screen">
   <div class="top-bar">
     <button class="back-btn" onclick="goHome()"><i class="ti ti-arrow-left"></i> Back</button>
     <span class="screen-title">ABG interpreter</span>
   </div>
-  <p style="font-size:13px;color:var(--text2);margin-bottom:14px;">Enter any ABG values and get a full clinical interpretation using the 4-step method.</p>
+  <p style="font-size:13px;color:var(--text2);margin-bottom:14px">Enter values for a full 4-step clinical interpretation.</p>
   <div class="abg-grid">
-    <div class="abg-field"><label>pH</label><input type="number" id="abg-ph" step="0.01" placeholder="7.35–7.45" oninput="interpretABG()"></div>
-    <div class="abg-field"><label>PaCO₂ (mmHg)</label><input type="number" id="abg-co2" step="1" placeholder="35–45" oninput="interpretABG()"></div>
-    <div class="abg-field"><label>HCO₃⁻ (mEq/L)</label><input type="number" id="abg-hco3" step="1" placeholder="22–26" oninput="interpretABG()"></div>
-    <div class="abg-field"><label>PaO₂ (mmHg)</label><input type="number" id="abg-pao2" step="1" placeholder="80–100" oninput="interpretABG()"></div>
-    <div class="abg-field"><label>FiO₂ (0.21–1.0)</label><input type="number" id="abg-fio2" step="0.01" placeholder="0.21" oninput="interpretABG()"></div>
-    <div class="abg-field"><label>Hb (g/dL)</label><input type="number" id="abg-hb" step="0.1" placeholder="12–16" oninput="interpretABG()"></div>
+    <div class="abg-field"><label>pH</label><input type="number" id="abg-ph" step="0.01" placeholder="7.35-7.45" oninput="interpretABG()"></div>
+    <div class="abg-field"><label>PaCO&#8322; (mmHg)</label><input type="number" id="abg-co2" step="1" placeholder="35-45" oninput="interpretABG()"></div>
+    <div class="abg-field"><label>HCO&#8323;&#8315; (mEq/L)</label><input type="number" id="abg-hco3" step="1" placeholder="22-26" oninput="interpretABG()"></div>
+    <div class="abg-field"><label>PaO&#8322; (mmHg)</label><input type="number" id="abg-pao2" step="1" placeholder="80-100" oninput="interpretABG()"></div>
+    <div class="abg-field"><label>FiO&#8322; (0.21-1.0)</label><input type="number" id="abg-fio2" step="0.01" placeholder="0.21" oninput="interpretABG()"></div>
+    <div class="abg-field"><label>Hb (g/dL)</label><input type="number" id="abg-hb" step="0.1" placeholder="12-16" oninput="interpretABG()"></div>
   </div>
   <div id="abg-result"></div>
 </div>
-
+ 
 <!-- VALUE REFERENCE -->
 <div id="ref-screen" class="screen">
   <div class="top-bar">
@@ -428,7 +383,7 @@ html, body { background: var(--bg3); color: var(--text); font-family: -apple-sys
   </div>
   <div class="ref-grid" id="ref-grid"></div>
 </div>
-
+ 
 <!-- VITAL SIGNS GUIDE -->
 <div id="vitals-screen" class="screen">
   <div class="top-bar">
@@ -437,7 +392,7 @@ html, body { background: var(--bg3); color: var(--text); font-family: -apple-sys
   </div>
   <div id="vitals-area"></div>
 </div>
-
+ 
 <!-- STUDY TIPS -->
 <div id="tips-screen" class="screen">
   <div class="top-bar">
@@ -446,277 +401,264 @@ html, body { background: var(--bg3); color: var(--text); font-family: -apple-sys
   </div>
   <div id="tips-area"></div>
 </div>
-
-</div><!-- #app -->
+ 
+</div>
 <script>
-/* ════════════════════════════════════════════════
-   DATA
-════════════════════════════════════════════════ */
-const CARDS = [
-  // Normal values
-  {tag:'Normal values', q:'Normal Respiratory Rate (RR) in a resting adult?', a:'12–18 breaths/min (some sources say 12–20)'},
-  {tag:'Normal values', q:'Normal Tidal Volume (VT)?', a:'6 mL/kg PBW (range 5–7 mL/kg PBW)'},
-  {tag:'Normal values', q:'Normal Minute Ventilation (VE)?', a:'5–10 L/min (approximately 100 mL/kg PBW/min)'},
-  {tag:'Normal values', q:'Normal PaCO₂?', a:'35–45 mmHg (reflects ventilation)'},
-  {tag:'Normal values', q:'Normal PaO₂?', a:'80–100 mmHg (reflects oxygenation)'},
-  {tag:'Normal values', q:'Normal arterial pH?', a:'7.35–7.45'},
-  {tag:'Normal values', q:'Normal HCO₃⁻?', a:'22–26 mEq/L (metabolic/renal marker)'},
-  {tag:'Normal values', q:'Normal SaO₂ / SpO₂?', a:'95–100%'},
-  {tag:'Normal values', q:'P/F ratio: normal vs. impairment threshold?', a:'Normal > 350–400; impairment < 300; ARDS < 200'},
-  {tag:'Normal values', q:'Normal CaO₂ (arterial oxygen content)?', a:'17–20 mL/dL (Vol%)'},
-  {tag:'Normal values', q:'Normal A–a gradient on room air?', a:'5–10 mmHg (increases with age and FiO₂)'},
-  {tag:'Normal values', q:'Normal VD/VT ratio?', a:'0.2–0.4 (about 30% wasted ventilation per breath)'},
-  {tag:'Normal values', q:'Normal anatomic dead space (rule of thumb)?', a:'~1 mL/lb of ideal body weight (≈ 2.2 mL/kg)'},
-  // Vital signs
-  {tag:'Vital signs', q:'Normal adult heart rate?', a:'60–100 beats/min'},
-  {tag:'Vital signs', q:'Define tachycardia vs. bradycardia?', a:'Tachycardia > 100/min; Bradycardia < 60/min'},
-  {tag:'Vital signs', q:'Define tachypnea vs. bradypnea?', a:'Tachypnea > 20/min; Bradypnea < 10/min'},
-  {tag:'Vital signs', q:'Normal adult body temperature?', a:'37°C (98.6°F); fever defined as > 38.3°C (101°F)'},
-  {tag:'Vital signs', q:'Normal blood pressure?', a:'Systolic < 120 mmHg; Diastolic < 80 mmHg'},
-  {tag:'Vital signs', q:'What is Pulsus Paradoxus?', a:'Systolic BP drops > 10 mmHg on inspiration; seen in severe asthma/COPD exacerbations'},
-  {tag:'Vital signs', q:'What is Pulsus Alternans?', a:'Alternating strong/weak pulses; suggests left-sided heart failure'},
-  {tag:'Vital signs', q:'What body temperature site is closest to core temp?', a:'Rectal (most accurate); tympanic also acceptable'},
-  // Formulas
-  {tag:'Formula', q:'Formula for Minute Ventilation (VE)?', a:'VE = RR × VT'},
-  {tag:'Formula', q:'Formula for Alveolar Ventilation (VA)?', a:'VA = (VT − VD) × RR'},
-  {tag:'Formula', q:'Formula for Arterial Oxygen Content (CaO₂)?', a:'CaO₂ = (Hb × 1.34 × SaO₂) + (PaO₂ × 0.003)'},
-  {tag:'Formula', q:'Formula for P/F Ratio?', a:'P/F = PaO₂ ÷ FiO₂'},
-  {tag:'Formula', q:'Simplified Alveolar Air Equation (room air, sea level)?', a:'PAO₂ = 150 − (1.25 × PaCO₂)'},
-  {tag:'Formula', q:'Full Alveolar Air Equation?', a:'PAO₂ = [(PB − PH₂O) × FiO₂] − (PaCO₂ ÷ RQ)  [PB=760, PH₂O=47, RQ=0.8]'},
-  {tag:'Formula', q:'Formula for A–a Gradient?', a:'A–a = PAO₂ − PaO₂'},
-  {tag:'Formula', q:'PBW formula for males?', a:'50 + 2.3 × (height in inches − 60) kg'},
-  {tag:'Formula', q:'PBW formula for females?', a:'45.5 + 2.3 × (height in inches − 60) kg'},
-  {tag:'Formula', q:'VD/VT ratio formula?', a:'VD/VT = (PaCO₂ − PeCO₂) ÷ PaCO₂'},
-  // Concepts
-  {tag:'Concept', q:'Why use PBW, not actual weight, for tidal volume?', a:'Lung size is determined by height and sex — not weight. Using actual weight in obese patients causes volutrauma (lung overdistension).'},
-  {tag:'Concept', q:'The "Breathing Pattern Trap" — what is it?', a:'Assuming high RR = adequate ventilation. Fast shallow breathing increases dead space fraction, actually worsening alveolar ventilation.'},
-  {tag:'Concept', q:'What does a high A–a gradient mean clinically?', a:'Gas exchange defect — shunt, V/Q mismatch, or pulmonary edema. Alveoli have O₂ but it\'s not reaching the blood.'},
-  {tag:'Concept', q:'Why can a SpO₂ of 98% be misleading?', a:'It doesn\'t reflect hemoglobin quantity. A severely anemic patient may saturate fully but have very low O₂ carrying capacity (low CaO₂).'},
-  {tag:'Concept', q:'What happens to PaCO₂ if VA is halved?', a:'PaCO₂ doubles — they are inversely proportional. Half the alveolar ventilation = twice the CO₂ retention.'},
-  {tag:'Concept', q:'Difference between minute ventilation and alveolar ventilation?', a:'VE = total air moved. VA = air reaching alveoli for gas exchange. VA = VE minus the dead space component.'},
-  {tag:'Concept', q:'Three types of dead space?', a:'1. Anatomic (conducting airways), 2. Alveolar (ventilated but not perfused), 3. Physiologic (anatomic + alveolar)'},
-  {tag:'Concept', q:'What does the respiratory quotient (RQ) represent?', a:'Ratio of CO₂ produced to O₂ consumed. Estimated at 0.8 for the alveolar air equation.'},
-  // ABG
-  {tag:'ABG', q:'pH < 7.35 means what?', a:'Acidemia'},
-  {tag:'ABG', q:'pH > 7.45 means what?', a:'Alkalemia'},
-  {tag:'ABG', q:'PaCO₂ > 45 + low pH = ?', a:'Respiratory acidosis (hypoventilation)'},
-  {tag:'ABG', q:'PaCO₂ < 35 + high pH = ?', a:'Respiratory alkalosis (hyperventilation)'},
-  {tag:'ABG', q:'HCO₃⁻ < 22 = ?', a:'Metabolic acidosis'},
-  {tag:'ABG', q:'HCO₃⁻ > 26 = ?', a:'Metabolic alkalosis'},
-  {tag:'ABG', q:'Normal HCO₃⁻ with abnormal pH and PaCO₂ = ?', a:'Acute (uncompensated) respiratory problem — kidneys haven\'t had time to compensate yet'},
-  {tag:'ABG', q:'ABG: pH 7.36, PaCO₂ 62, HCO₃ 36 — interpretation?', a:'Compensated (chronic) respiratory acidosis — classic COPD pattern. Kidneys raised HCO₃ to normalize pH.'},
-  {tag:'ABG', q:'4 steps of ABG interpretation?', a:'1. pH (acid/alkalemia) → 2. PaCO₂ (respiratory?) → 3. HCO₃ (metabolic?) → 4. PaO₂ (add hypoxemia if < 80)'},
-  {tag:'ABG', q:'RT response to respiratory acidosis?', a:'Increase ventilation — consider NIV, increase VT or RR, or intubate if severe'},
-  {tag:'ABG', q:'RT response to respiratory alkalosis?', a:'Decrease ventilation (if on vent); find underlying cause (hypoxemia, metabolic acidosis, anxiety)'},
-  // Decision
-  {tag:'Decision', q:'Key markers of Oxygenation Failure?', a:'Low PaO₂, Low SpO₂, Low P/F ratio, High A–a gradient'},
-  {tag:'Decision', q:'Key markers of Ventilation Failure?', a:'High PaCO₂, Low pH (acute), Low alveolar ventilation, High work of breathing'},
-  {tag:'Decision', q:'RT response to oxygenation failure?', a:'Increase FiO₂, apply PEEP or CPAP, reposition patient'},
-  {tag:'Decision', q:'RT response to ventilation failure?', a:'Increase ventilation, consider NIV, or intubate'},
-  {tag:'Decision', q:'The 4-step RT clinical framework?', a:'Assess → Interpret → Decide → Reassess'},
-  {tag:'Decision', q:'3 layers of NBRC Thinking Model?', a:'Layer 1: Know It → Layer 2: Apply It → Layer 3: Decide With It'},
-  // Labs
-  {tag:'Lab values', q:'Normal hemoglobin (Hb)?', a:'12–16 g/dL'},
-  {tag:'Lab values', q:'Normal hematocrit (Hct)?', a:'40–50%'},
-  {tag:'Lab values', q:'Normal WBC count?', a:'5,000–10,000/mm³'},
-  {tag:'Lab values', q:'Leukocytosis vs. leukopenia — what each suggests?', a:'Leukocytosis (high WBC) → bacterial infection; Leukopenia (low WBC) → viral infection'},
-  {tag:'Lab values', q:'Normal potassium (K⁺)?', a:'3.5–4.5 mEq/L'},
-  {tag:'Lab values', q:'Normal sodium (Na⁺)?', a:'135–145 mEq/L'},
-  {tag:'Lab values', q:'Normal chloride (Cl⁻)?', a:'90–100 mEq/L'},
-  {tag:'Lab values', q:'Normal creatinine?', a:'0.7–1.3 mg/dL (evaluates kidney function)'},
-  {tag:'Lab values', q:'Normal BUN?', a:'8–25 mg/dL (blood urea nitrogen — kidney function)'},
-  {tag:'Lab values', q:'Hb carries how much O₂ per gram?', a:'1.34 mL of O₂ per gram of hemoglobin'},
-  // Ventilator
-  {tag:'Ventilator', q:'Acceptable VT range for mechanical ventilation?', a:'4–8 mL/kg PBW; initial target 6–8 mL/kg PBW'},
-  {tag:'Ventilator', q:'ARDS VT target?', a:'4–8 mL/kg PBW (start at 6, may go lower); RR 25–35/min'},
-  {tag:'Ventilator', q:'Target plateau pressure (Pplat) on ventilator?', a:'< 30 cm H₂O'},
-  {tag:'Ventilator', q:'Target driving pressure on ventilator?', a:'≤ 15 cm H₂O'},
-  {tag:'Ventilator', q:'Initial ventilator RR?', a:'12–16 breaths/min'},
-  {tag:'Ventilator', q:'pH goal on mechanical ventilation?', a:'7.30–7.45'},
-  {tag:'Ventilator', q:'Oxygen-induced hypoventilation — who is at risk?', a:'COPD patients given high FiO₂ — may lose hypoxic drive and hypoventilate'},
+/* ── DATA ── */
+const CARDS=[
+{tag:'Normal values',q:'Normal Respiratory Rate (RR) in a resting adult?',a:'12-18 breaths/min (some sources 12-20)'},
+{tag:'Normal values',q:'Normal Tidal Volume (VT)?',a:'6 mL/kg PBW (range 5-7 mL/kg PBW)'},
+{tag:'Normal values',q:'Normal Minute Ventilation (VE)?',a:'5-10 L/min (~100 mL/kg PBW/min)'},
+{tag:'Normal values',q:'Normal PaCO2?',a:'35-45 mmHg (reflects ventilation)'},
+{tag:'Normal values',q:'Normal PaO2?',a:'80-100 mmHg (reflects oxygenation)'},
+{tag:'Normal values',q:'Normal arterial pH?',a:'7.35-7.45'},
+{tag:'Normal values',q:'Normal HCO3-?',a:'22-26 mEq/L (metabolic/renal marker)'},
+{tag:'Normal values',q:'Normal SaO2/SpO2?',a:'95-100%'},
+{tag:'Normal values',q:'P/F ratio: normal vs impairment threshold?',a:'Normal > 350; impairment < 300; ARDS < 200'},
+{tag:'Normal values',q:'Normal CaO2 (arterial oxygen content)?',a:'17-20 mL/dL (Vol%)'},
+{tag:'Normal values',q:'Normal A-a gradient on room air?',a:'5-10 mmHg (increases with age and higher FiO2)'},
+{tag:'Normal values',q:'Normal VD/VT ratio?',a:'0.2-0.4 (~30% wasted ventilation per breath)'},
+{tag:'Normal values',q:'Normal anatomic dead space (rule of thumb)?',a:'~1 mL/lb of ideal body weight (~2.2 mL/kg)'},
+{tag:'Vital signs',q:'Normal adult heart rate?',a:'60-100 beats/min'},
+{tag:'Vital signs',q:'Define tachycardia vs bradycardia?',a:'Tachycardia > 100/min; Bradycardia < 60/min'},
+{tag:'Vital signs',q:'Define tachypnea vs bradypnea?',a:'Tachypnea > 20/min; Bradypnea < 10/min'},
+{tag:'Vital signs',q:'Normal adult body temperature?',a:'37 C (98.6 F); fever > 38.3 C (101 F)'},
+{tag:'Vital signs',q:'Normal blood pressure?',a:'Systolic < 120; Diastolic < 80 mmHg'},
+{tag:'Vital signs',q:'What is Pulsus Paradoxus?',a:'Systolic BP drops >10 mmHg on inspiration; seen in severe asthma/COPD exacerbations'},
+{tag:'Vital signs',q:'What is Pulsus Alternans?',a:'Alternating strong/weak pulses; suggests left-sided heart failure'},
+{tag:'Vital signs',q:'What body temperature site is closest to core temp?',a:'Rectal (most accurate); tympanic also reliable'},
+{tag:'Vital signs',q:'Define hypotension?',a:'Systolic < 90 mmHg OR mean arterial pressure (MAP) < 65 mmHg'},
+{tag:'Vital signs',q:'Stage 1 vs Stage 2 Hypertension thresholds?',a:'Stage 1: 130-139/80-89 mmHg; Stage 2: >140/90 mmHg'},
+{tag:'Formula',q:'Formula for Minute Ventilation (VE)?',a:'VE = RR x VT'},
+{tag:'Formula',q:'Formula for Alveolar Ventilation (VA)?',a:'VA = (VT - VD) x RR'},
+{tag:'Formula',q:'Formula for Arterial Oxygen Content (CaO2)?',a:'CaO2 = (Hb x 1.34 x SaO2) + (PaO2 x 0.003)'},
+{tag:'Formula',q:'Formula for P/F Ratio?',a:'P/F = PaO2 / FiO2'},
+{tag:'Formula',q:'Simplified Alveolar Air Equation (room air, sea level)?',a:'PAO2 = 150 - (1.25 x PaCO2)'},
+{tag:'Formula',q:'Full Alveolar Air Equation?',a:'PAO2 = [(PB - PH2O) x FiO2] - (PaCO2 / RQ)  [PB=760, PH2O=47, RQ=0.8]'},
+{tag:'Formula',q:'Formula for A-a Gradient?',a:'A-a = PAO2 - PaO2'},
+{tag:'Formula',q:'PBW formula for males?',a:'50 + 2.3 x (height in inches - 60) kg'},
+{tag:'Formula',q:'PBW formula for females?',a:'45.5 + 2.3 x (height in inches - 60) kg'},
+{tag:'Formula',q:'VD/VT ratio formula?',a:'VD/VT = (PaCO2 - PeCO2) / PaCO2'},
+{tag:'Concept',q:'Why use PBW, not actual weight, for tidal volume?',a:'Lung size is determined by height and sex, not weight. Actual weight in obese patients causes volutrauma (lung overdistension).'},
+{tag:'Concept',q:'The Breathing Pattern Trap -- what is it?',a:'Assuming high RR = adequate ventilation. Fast shallow breathing increases dead space fraction, worsening alveolar ventilation.'},
+{tag:'Concept',q:'What does a high A-a gradient mean clinically?',a:'Gas exchange defect -- shunt, V/Q mismatch, or pulmonary edema. Alveoli have O2 but it is not reaching the blood.'},
+{tag:'Concept',q:'Why can a SpO2 of 98% be misleading?',a:'It does not reflect hemoglobin quantity. A severely anemic patient saturates fully but has low O2 carrying capacity (low CaO2).'},
+{tag:'Concept',q:'What happens to PaCO2 if alveolar ventilation (VA) is halved?',a:'PaCO2 doubles -- they are inversely proportional. Half the VA = twice the CO2 retention.'},
+{tag:'Concept',q:'Difference between minute ventilation and alveolar ventilation?',a:'VE = total air moved. VA = air reaching alveoli for gas exchange. VA = VE minus dead space component.'},
+{tag:'Concept',q:'Three types of dead space?',a:'1. Anatomic (conducting airways), 2. Alveolar (ventilated but not perfused), 3. Physiologic (anatomic + alveolar)'},
+{tag:'Concept',q:'What does the respiratory quotient (RQ) represent?',a:'Ratio of CO2 produced to O2 consumed. Estimated at 0.8 for the alveolar air equation.'},
+{tag:'ABG',q:'pH < 7.35 means what?',a:'Acidemia'},
+{tag:'ABG',q:'pH > 7.45 means what?',a:'Alkalemia'},
+{tag:'ABG',q:'PaCO2 > 45 + low pH?',a:'Respiratory acidosis (hypoventilation)'},
+{tag:'ABG',q:'PaCO2 < 35 + high pH?',a:'Respiratory alkalosis (hyperventilation)'},
+{tag:'ABG',q:'HCO3- < 22?',a:'Metabolic acidosis'},
+{tag:'ABG',q:'HCO3- > 26?',a:'Metabolic alkalosis'},
+{tag:'ABG',q:'Normal HCO3- with abnormal pH and PaCO2?',a:'Acute (uncompensated) respiratory problem -- kidneys have not compensated yet'},
+{tag:'ABG',q:'ABG: pH 7.36, PaCO2 62, HCO3 36 -- interpretation?',a:'Compensated chronic respiratory acidosis -- classic COPD. Kidneys raised HCO3 to normalize pH.'},
+{tag:'ABG',q:'4 steps of ABG interpretation?',a:'1. pH (acid/alkalemia) -> 2. PaCO2 (respiratory?) -> 3. HCO3 (metabolic?) -> 4. PaO2 (add hypoxemia if < 80)'},
+{tag:'ABG',q:'Scenario: pH 7.22, PaCO2 60, HCO3 24, PaO2 78 -- diagnosis?',a:'Acute respiratory acidosis with hypoxemia. High CO2, low pH, normal HCO3 (no compensation yet).'},
+{tag:'ABG',q:'Scenario: pH 7.48, PaCO2 30, HCO3 23, PaO2 58 -- diagnosis?',a:'Respiratory alkalosis with hypoxemia. Hyperventilating (likely in response to low O2).'},
+{tag:'ABG',q:'Scenario: pH 7.31, PaCO2 28, HCO3 14, PaO2 92 -- diagnosis?',a:'Metabolic acidosis with respiratory compensation. Lungs blowing off CO2 to raise pH.'},
+{tag:'Decision',q:'Key markers of Oxygenation Failure?',a:'Low PaO2, Low SpO2, Low P/F ratio, High A-a gradient'},
+{tag:'Decision',q:'Key markers of Ventilation Failure?',a:'High PaCO2, Low pH (acute), Low alveolar ventilation, High work of breathing'},
+{tag:'Decision',q:'RT response to oxygenation failure?',a:'Increase FiO2, apply PEEP or CPAP, reposition patient'},
+{tag:'Decision',q:'RT response to ventilation failure?',a:'Increase ventilation, consider NIV, or intubate'},
+{tag:'Decision',q:'The 4-step RT clinical framework?',a:'Assess -> Interpret -> Decide -> Reassess'},
+{tag:'Decision',q:'3 layers of NBRC Thinking Model?',a:'Layer 1: Know It -> Layer 2: Apply It -> Layer 3: Decide With It'},
+{tag:'Lab values',q:'Normal hemoglobin (Hb)?',a:'12-16 g/dL'},
+{tag:'Lab values',q:'Normal hematocrit (Hct)?',a:'40-50%'},
+{tag:'Lab values',q:'Normal WBC count?',a:'5,000-10,000 /mm3'},
+{tag:'Lab values',q:'Leukocytosis vs leukopenia -- what each suggests?',a:'Leukocytosis (high WBC) -> bacterial infection; Leukopenia (low WBC) -> viral infection'},
+{tag:'Lab values',q:'Normal potassium (K+)?',a:'3.5-4.5 mEq/L'},
+{tag:'Lab values',q:'Normal sodium (Na+)?',a:'135-145 mEq/L'},
+{tag:'Lab values',q:'Normal chloride (Cl-)?',a:'90-100 mEq/L'},
+{tag:'Lab values',q:'Normal creatinine?',a:'0.7-1.3 mg/dL (kidney function marker)'},
+{tag:'Lab values',q:'Normal BUN?',a:'8-25 mg/dL (blood urea nitrogen, kidney function)'},
+{tag:'Lab values',q:'Hb carries how much O2 per gram?',a:'1.34 mL of O2 per gram of hemoglobin'},
+{tag:'Lab values',q:'Eosinophils are associated with what condition?',a:'Asthma and allergic reactions (~2% of WBC normally)'},
+{tag:'Lab values',q:'Monocytes are associated with what infection?',a:'Tuberculosis (~3% of WBC)'},
+{tag:'Ventilator',q:'Acceptable VT range for mechanical ventilation?',a:'4-8 mL/kg PBW; initial target 6-8 mL/kg PBW'},
+{tag:'Ventilator',q:'ARDS VT target and RR?',a:'VT 4-8 mL/kg PBW (start at 6); RR 25-35/min'},
+{tag:'Ventilator',q:'Target plateau pressure (Pplat)?',a:'< 30 cm H2O'},
+{tag:'Ventilator',q:'Target driving pressure on ventilator?',a:'<= 15 cm H2O'},
+{tag:'Ventilator',q:'Initial ventilator RR?',a:'12-16 breaths/min'},
+{tag:'Ventilator',q:'pH goal on mechanical ventilation?',a:'7.30-7.45'},
+{tag:'Ventilator',q:'Oxygen-induced hypoventilation -- who is at risk and why?',a:'COPD patients on high FiO2. They rely on hypoxic drive; removing it causes CO2 retention and CNS depression.'},
+{tag:'Ventilator',q:'When should you decrease VT on the ventilator?',a:'When Pplat > 30 cm H2O -- decrease by 1 mL/kg steps (minimum 4 mL/kg)'},
 ];
-
-const QUIZ = [
-  {cat:'Layer 1 — Know It', q:'A patient has RR 18/min and VT 500 mL. What is Minute Ventilation?', opts:['7.2 L/min','9.0 L/min','8.5 L/min','6.0 L/min'], ans:1, exp:'VE = RR × VT = 18 × 0.5 L = 9.0 L/min. This is within the normal range of 5–10 L/min.'},
-  {cat:'Layer 1 — Know It', q:'Normal arterial pH range?', opts:['7.30–7.40','7.35–7.45','7.40–7.50','7.25–7.45'], ans:1, exp:'Normal pH is 7.35–7.45. Below 7.35 = acidemia; above 7.45 = alkalemia.'},
-  {cat:'Layer 1 — Know It', q:'P/F ratio is calculated as:', opts:['PaCO₂ ÷ FiO₂','PaO₂ − PaCO₂','PaO₂ ÷ FiO₂','FiO₂ × PaO₂'], ans:2, exp:'P/F = PaO₂ ÷ FiO₂. Normal > 350. < 300 = impairment. < 200 = ARDS (moderate-severe).'},
-  {cat:'Layer 1 — Know It', q:'Why use PBW instead of actual weight for tidal volume?', opts:['Easier to calculate','Actual weight triggers alarms','Lung size correlates with height and sex, not weight','PBW includes BMI correction'], ans:2, exp:'Lungs do not expand with body fat. Using actual weight in an obese patient would overdistend alveoli (volutrauma). PBW is based on height and sex — the true determinants of lung size.'},
-  {cat:'Layer 1 — Know It', q:'Normal anatomic dead space rule of thumb?', opts:['0.5 mL/lb ideal body weight','1 mL/lb ideal body weight','2 mL/lb ideal body weight','150 mL fixed for all adults'], ans:1, exp:'Anatomic dead space ≈ 1 mL/lb of ideal body weight (≈ 2.2 mL/kg). For a 150-lb person, this is about 150 mL.'},
-  {cat:'Layer 1 — Know It', q:'Normal A–a gradient on room air?', opts:['0–2 mmHg','5–10 mmHg','15–25 mmHg','> 30 mmHg'], ans:1, exp:'Normal A–a gradient is 5–10 mmHg on room air. It increases with age and with higher FiO₂. An elevated gradient indicates a gas exchange defect.'},
-  {cat:'Layer 2 — Apply It', q:'A patient on FiO₂ 60% has PaO₂ of 90 mmHg. Their P/F ratio is:', opts:['54','150','90','200'], ans:1, exp:'P/F = 90 ÷ 0.60 = 150. This is below the 300 threshold, indicating significant oxygenation failure. P/F < 200 meets ARDS criteria.'},
-  {cat:'Layer 2 — Apply It', q:'ABG: pH 7.28 / PaCO₂ 58 / HCO₃ 24. Primary disturbance?', opts:['Metabolic acidosis','Respiratory alkalosis','Acute respiratory acidosis','Metabolic alkalosis'], ans:2, exp:'pH 7.28 = acidemia. PaCO₂ 58 (> 45) = respiratory acidosis. HCO₃ 24 = normal, so no renal compensation yet. This is acute respiratory acidosis.'},
-  {cat:'Layer 2 — Apply It', q:'Patient: RR 24, VT 300 mL, VD 200 mL. What is alveolar ventilation?', opts:['2.4 L/min','7.2 L/min','4.8 L/min','1.2 L/min'], ans:0, exp:'VA = (VT − VD) × RR = (300 − 200) × 24 = 100 × 24 = 2,400 mL/min = 2.4 L/min. Despite a normal VE (7.2 L/min), alveolar ventilation is critically low due to small tidal volumes relative to dead space.'},
-  {cat:'Layer 2 — Apply It', q:'CaO₂ with Hb 15, SaO₂ 0.97, PaO₂ 95. Which carries more O₂?', opts:['Dissolved (PaO₂ × 0.003)','Hemoglobin-bound (Hb × 1.34 × SaO₂)','Equal amounts','Cannot determine without FiO₂'], ans:1, exp:'Hb-bound = 15 × 1.34 × 0.97 ≈ 19.5 mL/dL. Dissolved = 95 × 0.003 = 0.29 mL/dL. Hemoglobin carries ~98% of all oxygen in the blood.'},
-  {cat:'Layer 2 — Apply It', q:'Simplified alveolar air equation (room air): PaCO₂ is 40. PAO₂ = ?', opts:['110 mmHg','150 mmHg','100 mmHg','140 mmHg'], ans:2, exp:'PAO₂ = 150 − (1.25 × PaCO₂) = 150 − (1.25 × 40) = 150 − 50 = 100 mmHg. This is normal PAO₂ at sea level on room air.'},
-  {cat:'Layer 2 — Apply It', q:'A leukocytosis (high WBC) most likely suggests:', opts:['Viral infection','Bacterial infection','Allergic reaction','Kidney failure'], ans:1, exp:'Leukocytosis (WBC > 10,000) typically indicates bacterial infection — antibiotics recommended. Leukopenia (low WBC) suggests viral infection — antivirals recommended.'},
-  {cat:'Layer 3 — Decide', q:'A patient: lethargic, RR 8, PaCO₂ 68, pH 7.22. Priority action?', opts:['Increase FiO₂ only','Reposition patient','Urgently consider NIV or intubation','Apply PEEP and monitor'], ans:2, exp:'Lethargy + PaCO₂ 68 + pH 7.22 + RR 8 = severe acute ventilation failure. The patient is tiring out and at risk of arrest. Immediate escalation to NIV or invasive ventilation is required.'},
-  {cat:'Layer 3 — Decide', q:'Elevated A–a gradient indicates:', opts:['Normal gas exchange','Pure hypoventilation only','V/Q mismatch or shunt (gas exchange defect)','Metabolic compensation'], ans:2, exp:'A–a gradient compares alveolar O₂ to arterial O₂. If elevated, O₂ is in the alveoli but not reaching the blood — classic for shunt or V/Q mismatch. Pure hypoventilation keeps A–a gradient normal.'},
-  {cat:'Layer 3 — Decide', q:'COPD patient receiving high FiO₂ becomes lethargic. Why?', opts:['Fever from secondary infection','Oxygen-induced hypoventilation — loss of hypoxic drive','CO₂ toxicity to brain','Metabolic alkalosis from O₂'], ans:1, exp:'COPD patients with chronic hypercapnia may rely on hypoxic drive to breathe. High FiO₂ removes that drive, causing hypoventilation, CO₂ retention, and CNS depression. Monitor carefully and titrate O₂.'},
-  {cat:'Layer 3 — Decide', q:'After NIV for a hypercapnic patient, what should you reassess?', opts:['SpO₂ only','RR change only','Repeat ABG, mental status, work of breathing, SpO₂','Only pH on repeat ABG'], ans:2, exp:'Comprehensive reassessment after any intervention: repeat ABG confirms PaCO₂ trending down; mental status shows neurological improvement; work of breathing shows effort; SpO₂ confirms oxygenation is maintained.'},
+ 
+const QUIZ=[
+{cat:'Layer 1 - Know It',q:'A patient has RR 18/min and VT 500 mL. What is their Minute Ventilation?',opts:['7.2 L/min','9.0 L/min','8.5 L/min','6.0 L/min'],ans:1,exp:'VE = RR x VT = 18 x 0.5 L = 9.0 L/min. This is within the normal range of 5-10 L/min.'},
+{cat:'Layer 1 - Know It',q:'Normal arterial pH range?',opts:['7.30-7.40','7.35-7.45','7.40-7.50','7.25-7.45'],ans:1,exp:'Normal pH is 7.35-7.45. Below 7.35 = acidemia; above 7.45 = alkalemia.'},
+{cat:'Layer 1 - Know It',q:'P/F ratio formula?',opts:['PaCO2 / FiO2','PaO2 - PaCO2','PaO2 / FiO2','FiO2 x PaO2'],ans:2,exp:'P/F = PaO2 / FiO2. Normal > 350. < 300 = impairment. < 200 = ARDS.'},
+{cat:'Layer 1 - Know It',q:'Why use PBW instead of actual weight for VT?',opts:['Easier to calculate','Actual weight triggers alarms','Lung size correlates with height and sex, not weight','PBW includes BMI correction'],ans:2,exp:'Lungs do not expand with body fat. Using actual weight in an obese patient would overdistend alveoli (volutrauma). PBW (height/sex) reflects actual lung size.'},
+{cat:'Layer 1 - Know It',q:'Normal anatomic dead space rule of thumb?',opts:['0.5 mL/lb ideal body weight','1 mL/lb ideal body weight','2 mL/lb ideal body weight','150 mL fixed for all adults'],ans:1,exp:'Anatomic dead space ~= 1 mL/lb of ideal body weight (~2.2 mL/kg). For a 150-lb person, this is about 150 mL.'},
+{cat:'Layer 1 - Know It',q:'Normal A-a gradient on room air?',opts:['0-2 mmHg','5-10 mmHg','15-25 mmHg','> 30 mmHg'],ans:1,exp:'Normal A-a gradient is 5-10 mmHg on room air. It increases with age and higher FiO2. An elevated gradient = gas exchange defect.'},
+{cat:'Layer 2 - Apply It',q:'A patient on FiO2 60% has PaO2 of 90 mmHg. P/F ratio?',opts:['54','150','90','200'],ans:1,exp:'P/F = 90 / 0.60 = 150. This is below the 300 threshold, indicating significant oxygenation failure. P/F < 200 meets ARDS criteria.'},
+{cat:'Layer 2 - Apply It',q:'ABG: pH 7.28, PaCO2 58, HCO3 24. Primary disturbance?',opts:['Metabolic acidosis','Respiratory alkalosis','Acute respiratory acidosis','Metabolic alkalosis'],ans:2,exp:'pH 7.28 = acidemia. PaCO2 58 (> 45) = respiratory acidosis. HCO3 24 = normal, no renal compensation yet. Acute respiratory acidosis.'},
+{cat:'Layer 2 - Apply It',q:'Patient: RR 24, VT 300 mL, VD 200 mL. Alveolar ventilation?',opts:['2.4 L/min','7.2 L/min','4.8 L/min','1.2 L/min'],ans:0,exp:'VA = (VT - VD) x RR = (300-200) x 24 = 100 x 24 = 2400 mL/min = 2.4 L/min. Despite normal VE (7.2 L/min), VA is critically low -- the Breathing Pattern Trap.'},
+{cat:'Layer 2 - Apply It',q:'CaO2 with Hb 15, SaO2 0.97, PaO2 95. Which carries more O2?',opts:['Dissolved (PaO2 x 0.003)','Hemoglobin-bound (Hb x 1.34 x SaO2)','Equal amounts','Cannot determine without FiO2'],ans:1,exp:'Hb-bound = 15 x 1.34 x 0.97 = 19.5 mL/dL. Dissolved = 95 x 0.003 = 0.29 mL/dL. Hemoglobin carries ~98% of all oxygen.'},
+{cat:'Layer 2 - Apply It',q:'Simplified alveolar air equation at room air: PaCO2 = 40. PAO2 = ?',opts:['110 mmHg','150 mmHg','100 mmHg','140 mmHg'],ans:2,exp:'PAO2 = 150 - (1.25 x PaCO2) = 150 - 50 = 100 mmHg. Normal PAO2 at sea level on room air.'},
+{cat:'Layer 2 - Apply It',q:'Leukocytosis (high WBC) most likely suggests:',opts:['Viral infection','Bacterial infection','Allergic reaction','Kidney failure'],ans:1,exp:'Leukocytosis (WBC > 10,000) = bacterial infection (antibiotics). Leukopenia (low WBC) = viral infection (antivirals).'},
+{cat:'Layer 3 - Decide',q:'Patient: lethargic, RR 8, PaCO2 68, pH 7.22. Priority action?',opts:['Increase FiO2 only','Reposition patient','Urgently consider NIV or intubation','Apply PEEP and monitor'],ans:2,exp:'Lethargy + PaCO2 68 + pH 7.22 + RR 8 = severe acute ventilation failure. Patient is tiring out. Immediate escalation to NIV or intubation is required.'},
+{cat:'Layer 3 - Decide',q:'Elevated A-a gradient indicates:',opts:['Normal gas exchange','Pure hypoventilation only','V/Q mismatch or shunt (gas exchange defect)','Metabolic compensation'],ans:2,exp:'A-a gradient = PAO2 - PaO2. If elevated, O2 is in the alveoli but not reaching the blood -- shunt or V/Q mismatch. Pure hypoventilation keeps A-a gradient normal.'},
+{cat:'Layer 3 - Decide',q:'COPD patient on high FiO2 becomes lethargic. Why?',opts:['Fever from infection','Oxygen-induced hypoventilation -- loss of hypoxic drive','CO2 toxicity to brain directly','Metabolic alkalosis from O2'],ans:1,exp:'COPD patients with chronic hypercapnia rely on hypoxic drive. High FiO2 removes that drive, causing hypoventilation, CO2 retention, and CNS depression.'},
+{cat:'Layer 3 - Decide',q:'After NIV for a hypercapnic patient, what confirms improvement?',opts:['SpO2 alone','RR change only','Repeat ABG + mental status + work of breathing + SpO2','Only pH on repeat ABG'],ans:2,exp:'True improvement requires: PaCO2 trending down on ABG, clearing mentation, decreased work of breathing, and maintained SpO2. SpO2 alone is insufficient.'},
 ];
-
-const SCENARIOS = [
-  {
-    title:'COPD exacerbation',
-    story:'A 68-year-old male with known COPD presents with confusion and increased work of breathing. His wife reports 2 days of increasing fatigue and skipped inhalers.',
-    vitals:[{l:'RR',v:'28/min',a:true},{l:'SpO₂',v:'88%',a:true},{l:'pH',v:'7.24',a:true},{l:'PaCO₂',v:'72 mmHg',a:true},{l:'PaO₂',v:'52 mmHg',a:true},{l:'HCO₃⁻',v:'28 mEq/L',a:false}],
-    questions:[
-      {q:'Step 1 — Assess: Primary acid-base disturbance?', opts:['Metabolic acidosis','Acute-on-chronic respiratory acidosis','Respiratory alkalosis','Compensated metabolic alkalosis'], ans:1, exp:'pH 7.24 = acidemia. PaCO₂ 72 = respiratory acidosis. HCO₃ 28 (slightly elevated) shows partial metabolic compensation — the kidneys have been working to compensate, indicating a chronic component with an acute flare.'},
-      {q:'Step 2 — Interpret: Oxygenation failure, ventilation failure, or both?', opts:['Oxygenation only','Ventilation only','Both','Neither — values acceptable'], ans:2, exp:'PaO₂ 52 and SpO₂ 88% = oxygenation failure. PaCO₂ 72 and pH 7.24 = ventilation failure. Both systems failing simultaneously — classic severe COPD exacerbation.'},
-      {q:'Step 3 — Decide: Most immediately life-threatening problem?', opts:['High RR needs sedation','Ventilation failure with confusion — risk of respiratory arrest','Low SpO₂ alone — increase FiO₂ only','HCO₃ elevation — treat metabolic alkalosis'], ans:1, exp:'Confusion + severe hypercapnia + acidemia = patient tiring out, at risk of arrest. BiPAP/NIV is first-line for COPD. Do NOT give high FiO₂ without monitoring — risk of oxygen-induced hypoventilation. Prepare for intubation if NIV fails.'},
-      {q:'Step 4 — Reassess: After starting BiPAP, what confirms improvement?', opts:['SpO₂ ≥ 95% alone is sufficient','Mental status improving AND PaCO₂ trending down on repeat ABG','RR normalizing to 18/min','Any one of these is enough'], ans:1, exp:'SpO₂ alone is insufficient. True improvement requires: clearing mentation (less confusion), PaCO₂ trending down on repeat ABG (30–60 min), decreased work of breathing, and stable or improving pH.'},
-    ]
-  },
-  {
-    title:'Severe pneumonia / ARDS',
-    story:'A 45-year-old woman with 4-day worsening bilateral pneumonia. High-flow O₂ at FiO₂ 70%. She is anxious, using accessory muscles, and has bilateral crackles.',
-    vitals:[{l:'RR',v:'32/min',a:true},{l:'SpO₂',v:'91%',a:true},{l:'FiO₂',v:'0.70',a:true},{l:'pH',v:'7.48',a:true},{l:'PaCO₂',v:'30 mmHg',a:true},{l:'PaO₂',v:'63 mmHg',a:true}],
-    questions:[
-      {q:'Calculate P/F ratio. What does it indicate?', opts:['P/F = 90 — severe oxygenation failure','P/F = 150 — moderate failure','P/F = 210 — mild impairment','P/F = 63 — use PaO₂ directly'], ans:0, exp:'P/F = 63 ÷ 0.70 = 90. P/F < 100 meets criteria for severe ARDS. This is critical oxygenation failure despite 70% oxygen — simple FiO₂ increases will not solve this.'},
-      {q:'pH 7.48, PaCO₂ 30 — what does this pattern represent?', opts:['Respiratory acidosis — hypoventilating','Metabolic acidosis from sepsis','Respiratory alkalosis — hyperventilating from hypoxemia','Compensated metabolic alkalosis'], ans:2, exp:'PaCO₂ 30 < 35 = respiratory alkalosis. pH 7.48 = alkalemia. She is hyperventilating (RR 32) as a stress response to severe hypoxemia. This is a warning sign — she is working dangerously hard just to maintain SpO₂ 91%.'},
-      {q:'Best intervention for this oxygenation failure?', opts:['Decrease FiO₂ to prevent O₂ toxicity','Apply PEEP/CPAP; prepare for intubation if no improvement','Start bronchodilators and chest PT','Increase RR target on ventilator'], ans:1, exp:'PEEP recruits collapsed alveoli and improves V/Q matching — the core intervention for oxygenation failure with bilateral infiltrates. With P/F of 90 and severe work of breathing, she likely needs intubation with lung-protective ventilation (VT 6 mL/kg PBW, Pplat < 30 cm H₂O).'},
-    ]
-  },
-  {
-    title:'Metabolic acidosis with compensation',
-    story:'A 55-year-old diabetic male presents with deep rapid breathing (Kussmaul respirations), nausea, and altered mental status. Blood glucose is 480 mg/dL.',
-    vitals:[{l:'RR',v:'26/min',a:true},{l:'SpO₂',v:'97%',a:false},{l:'pH',v:'7.18',a:true},{l:'PaCO₂',v:'22 mmHg',a:true},{l:'PaO₂',v:'94 mmHg',a:false},{l:'HCO₃⁻',v:'8 mEq/L',a:true}],
-    questions:[
-      {q:'Step 1 — What is the primary acid-base disturbance?', opts:['Respiratory acidosis','Respiratory alkalosis','Metabolic acidosis with respiratory compensation','Metabolic alkalosis'], ans:2, exp:'pH 7.18 = severe acidemia. HCO₃ 8 (< 22) = metabolic acidosis primary problem. PaCO₂ 22 (< 35) = lungs are compensating by blowing off CO₂. Classic DKA pattern.'},
-      {q:'Step 2 — The deep rapid breathing (Kussmaul) represents:', opts:['Anxiety and hyperventilation','Lung disease causing hypoxemia','Compensatory respiratory alkalosis to correct metabolic acidosis','Respiratory acidosis worsening'], ans:2, exp:'Kussmaul respirations are the body\'s attempt to blow off CO₂ and raise pH. This is helpful compensation — do NOT suppress the respiratory rate or sedate the patient, or pH will crash further.'},
-      {q:'Step 3 — RT priority in this patient?', opts:['Intubate immediately for airway protection','Increase FiO₂ — oxygenation is the main problem','Monitor work of breathing closely — patient may tire out compensating','Apply PEEP for oxygenation failure'], ans:2, exp:'PaO₂ 94 and SpO₂ 97% — oxygenation is adequate. The danger is respiratory fatigue. If this patient tires out and can\'t maintain compensation, pH will plummet. Alert the team, monitor work of breathing, and be ready to support ventilation.'},
-    ]
-  },
+ 
+const SCENARIOS=[
+{title:'COPD exacerbation',
+story:'A 68-year-old male with known COPD presents with confusion and increased work of breathing. His wife reports 2 days of increasing fatigue and skipped inhalers.',
+vitals:[{l:'RR',v:'28/min',a:1},{l:'SpO2',v:'88%',a:1},{l:'pH',v:'7.24',a:1},{l:'PaCO2',v:'72 mmHg',a:1},{l:'PaO2',v:'52 mmHg',a:1},{l:'HCO3-',v:'28 mEq/L',a:0}],
+questions:[
+{q:'Step 1 - Assess: Primary acid-base disturbance?',opts:['Metabolic acidosis','Acute-on-chronic respiratory acidosis','Respiratory alkalosis','Compensated metabolic alkalosis'],ans:1,exp:'pH 7.24 = acidemia. PaCO2 72 = respiratory acidosis. HCO3 28 (slightly elevated) shows partial metabolic compensation -- chronic component with acute flare.'},
+{q:'Step 2 - Interpret: Oxygenation failure, ventilation failure, or both?',opts:['Oxygenation only','Ventilation only','Both','Neither -- values acceptable'],ans:2,exp:'PaO2 52 and SpO2 88% = oxygenation failure. PaCO2 72 and pH 7.24 = ventilation failure. Both systems failing -- classic severe COPD exacerbation.'},
+{q:'Step 3 - Decide: Most immediately life-threatening problem?',opts:['High RR needs sedation','Ventilation failure with confusion -- risk of respiratory arrest','Low SpO2 alone -- increase FiO2 only','HCO3 elevation -- treat metabolic alkalosis'],ans:1,exp:'Confusion + severe hypercapnia + acidemia = patient tiring out, at risk of arrest. BiPAP/NIV is first-line for COPD. Do NOT give high FiO2 without monitoring -- risk of oxygen-induced hypoventilation.'},
+{q:'Step 4 - Reassess: After BiPAP, what confirms improvement?',opts:['SpO2 >= 95% alone sufficient','Mental status improving AND PaCO2 trending down on ABG','RR normalizing to 18/min','Any one of these is enough'],ans:1,exp:'SpO2 alone is insufficient. True improvement: clearing mentation, PaCO2 trending down on repeat ABG (30-60 min), decreased work of breathing, stable/improving pH.'},
+]},
+{title:'Severe pneumonia / ARDS',
+story:'A 45-year-old woman with 4-day worsening bilateral pneumonia. High-flow O2 at FiO2 70%. She is anxious, using accessory muscles, and has bilateral crackles.',
+vitals:[{l:'RR',v:'32/min',a:1},{l:'SpO2',v:'91%',a:1},{l:'FiO2',v:'0.70',a:1},{l:'pH',v:'7.48',a:1},{l:'PaCO2',v:'30 mmHg',a:1},{l:'PaO2',v:'63 mmHg',a:1}],
+questions:[
+{q:'Calculate P/F ratio. What does it indicate?',opts:['P/F = 90 -- severe oxygenation failure','P/F = 150 -- moderate failure','P/F = 210 -- mild impairment','P/F = 63 -- use PaO2 directly'],ans:0,exp:'P/F = 63 / 0.70 = 90. P/F < 100 meets criteria for severe ARDS. Critical oxygenation failure despite 70% oxygen.'},
+{q:'pH 7.48, PaCO2 30 -- what does this pattern represent?',opts:['Respiratory acidosis -- hypoventilating','Metabolic acidosis from sepsis','Respiratory alkalosis -- hyperventilating from hypoxemia','Compensated metabolic alkalosis'],ans:2,exp:'PaCO2 30 < 35 = respiratory alkalosis. pH 7.48 = alkalemia. She is hyperventilating (RR 32) as a stress response to hypoxemia. Warning sign -- she is working dangerously hard.'},
+{q:'Best intervention for this oxygenation failure?',opts:['Decrease FiO2 to prevent O2 toxicity','Apply PEEP/CPAP; prepare for intubation if no improvement','Start bronchodilators and chest PT','Increase RR target on ventilator'],ans:1,exp:'PEEP recruits collapsed alveoli and improves V/Q matching -- the core intervention for oxygenation failure with bilateral infiltrates. P/F of 90 + severe work of breathing = likely needs intubation with lung-protective ventilation (VT 6 mL/kg PBW, Pplat < 30).'},
+]},
+{title:'Metabolic acidosis with compensation',
+story:'A 55-year-old diabetic male presents with deep rapid breathing (Kussmaul respirations), nausea, and altered mental status. Blood glucose is 480 mg/dL.',
+vitals:[{l:'RR',v:'26/min',a:1},{l:'SpO2',v:'97%',a:0},{l:'pH',v:'7.18',a:1},{l:'PaCO2',v:'22 mmHg',a:1},{l:'PaO2',v:'94 mmHg',a:0},{l:'HCO3-',v:'8 mEq/L',a:1}],
+questions:[
+{q:'Step 1 - What is the primary acid-base disturbance?',opts:['Respiratory acidosis','Respiratory alkalosis','Metabolic acidosis with respiratory compensation','Metabolic alkalosis'],ans:2,exp:'pH 7.18 = severe acidemia. HCO3 8 (< 22) = metabolic acidosis. PaCO2 22 (< 35) = lungs compensating by blowing off CO2. Classic DKA pattern.'},
+{q:'Step 2 - The deep rapid breathing (Kussmaul) represents:',opts:['Anxiety and hyperventilation','Lung disease causing hypoxemia','Compensatory respiratory alkalosis to correct metabolic acidosis','Respiratory acidosis worsening'],ans:2,exp:'Kussmaul respirations are the body blowing off CO2 to raise pH. This is helpful -- do NOT suppress the RR or sedate the patient without airway management, or pH will crash.'},
+{q:'Step 3 - RT priority in this patient?',opts:['Intubate immediately','Increase FiO2 -- oxygenation is main problem','Monitor work of breathing -- patient may tire out compensating','Apply PEEP for oxygenation failure'],ans:2,exp:'PaO2 94 and SpO2 97% -- oxygenation is adequate. The danger is respiratory fatigue. If the patient tires out and stops compensating, pH will plummet. Monitor work of breathing closely and be ready to support ventilation.'},
+]},
 ];
-
-const FIB_QUESTIONS = [
-  {cat:'Formula', prompt:'VE = ___ × ___', ans:['rr × vt','rr x vt','f x vt','f × vt','vt × rr'], display:'RR × VT', hint:'Minute ventilation = breathing rate times tidal volume'},
-  {cat:'Formula', prompt:'VA = (___ − ___) × RR', ans:['vt - vd','vt – vd'], display:'VT − VD', hint:'Alveolar ventilation uses net volume after dead space'},
-  {cat:'Formula', prompt:'CaO₂ = (Hb × ___ × SaO₂) + (PaO₂ × ___)', ans:['1.34, 0.003','1.34 and 0.003'], display:'1.34 and 0.003', hint:'Hb binding constant = 1.34; dissolved coefficient = 0.003'},
-  {cat:'Formula', prompt:'P/F ratio = ___ ÷ ___', ans:['pao2 / fio2','pao2 ÷ fio2','pao2/fio2'], display:'PaO₂ ÷ FiO₂', hint:'Arterial O₂ divided by fractional inspired O₂'},
-  {cat:'Formula', prompt:'PBW male = 50 + ___ × (height in inches − 60)', ans:['2.3'], display:'2.3', hint:'This multiplier applies to both male and female formulas'},
-  {cat:'Normal value', prompt:'Normal pH range: ___ to ___', ans:['7.35 to 7.45','7.35-7.45'], display:'7.35–7.45', hint:'Below = acidemia; above = alkalemia'},
-  {cat:'Normal value', prompt:'Normal PaCO₂: ___ to ___ mmHg', ans:['35 to 45','35-45'], display:'35–45', hint:'The respiratory marker — controlled by the lungs'},
-  {cat:'Normal value', prompt:'Normal HCO₃⁻: ___ to ___ mEq/L', ans:['22 to 26','22-26'], display:'22–26', hint:'The metabolic marker — controlled by the kidneys'},
-  {cat:'Normal value', prompt:'Normal PaO₂: ___ to ___ mmHg', ans:['80 to 100','80-100'], display:'80–100', hint:'Arterial oxygenation marker'},
-  {cat:'Normal value', prompt:'Normal VT: ___ mL/kg PBW', ans:['6','6 ml/kg','5-7','5 to 7'], display:'6 mL/kg (range 5–7)', hint:'The lung-protective target for ventilation'},
-  {cat:'Normal value', prompt:'Normal A–a gradient on room air: ___ to ___ mmHg', ans:['5 to 10','5-10'], display:'5–10', hint:'Higher gradient = gas exchange defect'},
-  {cat:'ABG interpretation', prompt:'PaCO₂ > 45 + low pH = respiratory ___', ans:['acidosis'], display:'acidosis', hint:'High CO₂ = not ventilating enough'},
-  {cat:'ABG interpretation', prompt:'PaCO₂ < 35 + high pH = respiratory ___', ans:['alkalosis'], display:'alkalosis', hint:'Low CO₂ = blowing off too much CO₂'},
-  {cat:'ABG interpretation', prompt:'HCO₃⁻ < 22 = metabolic ___', ans:['acidosis'], display:'acidosis', hint:'Kidneys are not buffering / losing bicarbonate'},
-  {cat:'ABG interpretation', prompt:'HCO₃⁻ > 26 = metabolic ___', ans:['alkalosis'], display:'alkalosis', hint:'Too much bicarbonate in the system'},
-  {cat:'Lab value', prompt:'Normal Hb: ___ to ___ g/dL', ans:['12 to 16','12-16'], display:'12–16', hint:'Low = anemia; High = polycythemia'},
-  {cat:'Lab value', prompt:'Normal WBC: ___ to ___ /mm³', ans:['5000 to 10000','5,000 to 10,000','5000-10000'], display:'5,000–10,000', hint:'High = bacterial; Low = viral'},
-  {cat:'Lab value', prompt:'Hb carries ___ mL of O₂ per gram', ans:['1.34'], display:'1.34', hint:'This constant appears in the CaO₂ formula'},
+ 
+const FIBS=[
+{cat:'Formula',prompt:'VE = ___ x ___',ans:['rr x vt','rr * vt','vt x rr'],display:'RR x VT',hint:'Minute ventilation = breathing rate times tidal volume'},
+{cat:'Formula',prompt:'VA = (VT - ___) x RR',ans:['vd'],display:'VD',hint:'Dead space volume is subtracted from tidal volume'},
+{cat:'Formula',prompt:'CaO2 = (Hb x ___ x SaO2) + (PaO2 x ___)',ans:['1.34, 0.003','1.34 and 0.003'],display:'1.34 and 0.003',hint:'Hb binding constant = 1.34; dissolved O2 coefficient = 0.003'},
+{cat:'Formula',prompt:'P/F ratio = ___ / ___',ans:['pao2 / fio2','pao2/fio2'],display:'PaO2 / FiO2',hint:'Arterial O2 divided by fractional inspired O2'},
+{cat:'Formula',prompt:'PBW male = 50 + ___ x (height in inches - 60)',ans:['2.3'],display:'2.3',hint:'This multiplier applies to both male and female PBW formulas'},
+{cat:'Formula',prompt:'PAO2 (simplified, room air) = 150 - (___ x PaCO2)',ans:['1.25'],display:'1.25',hint:'The simplified alveolar air equation constant'},
+{cat:'Normal value',prompt:'Normal pH range: ___ to ___',ans:['7.35 to 7.45','7.35-7.45'],display:'7.35-7.45',hint:'Below = acidemia; above = alkalemia'},
+{cat:'Normal value',prompt:'Normal PaCO2: ___ to ___ mmHg',ans:['35 to 45','35-45'],display:'35-45',hint:'The respiratory marker, controlled by the lungs'},
+{cat:'Normal value',prompt:'Normal HCO3-: ___ to ___ mEq/L',ans:['22 to 26','22-26'],display:'22-26',hint:'The metabolic marker, controlled by the kidneys'},
+{cat:'Normal value',prompt:'Normal PaO2: ___ to ___ mmHg',ans:['80 to 100','80-100'],display:'80-100',hint:'Arterial oxygenation marker'},
+{cat:'Normal value',prompt:'Normal VT: ___ mL/kg PBW',ans:['6','6 ml/kg'],display:'6 mL/kg (range 5-7)',hint:'The lung-protective target for ventilation'},
+{cat:'Normal value',prompt:'Normal A-a gradient on room air: ___ to ___ mmHg',ans:['5 to 10','5-10'],display:'5-10',hint:'Higher gradient = gas exchange defect (shunt/V-Q mismatch)'},
+{cat:'ABG',prompt:'PaCO2 > 45 + low pH = respiratory ___',ans:['acidosis'],display:'acidosis',hint:'High CO2 = not ventilating enough = hypoventilation'},
+{cat:'ABG',prompt:'PaCO2 < 35 + high pH = respiratory ___',ans:['alkalosis'],display:'alkalosis',hint:'Low CO2 = blowing off too much CO2 = hyperventilation'},
+{cat:'ABG',prompt:'HCO3- < 22 = metabolic ___',ans:['acidosis'],display:'acidosis',hint:'Kidneys are not buffering / losing bicarbonate'},
+{cat:'ABG',prompt:'HCO3- > 26 = metabolic ___',ans:['alkalosis'],display:'alkalosis',hint:'Too much bicarbonate in the system'},
+{cat:'Lab value',prompt:'Normal Hb: ___ to ___ g/dL',ans:['12 to 16','12-16'],display:'12-16',hint:'Low = anemia; High = polycythemia'},
+{cat:'Lab value',prompt:'Normal WBC: ___ to ___ /mm3',ans:['5000 to 10000','5,000 to 10,000','5000-10000'],display:'5,000-10,000',hint:'High = bacterial infection; Low = viral infection'},
+{cat:'Lab value',prompt:'Hb carries ___ mL of O2 per gram',ans:['1.34'],display:'1.34',hint:'This constant appears in the CaO2 formula'},
+{cat:'Vital signs',prompt:'Fever is defined as temperature > ___C (___F)',ans:['38.3','101'],display:'38.3 C (101 F)',hint:'Average normal is 37 C (98.6 F)'},
 ];
-
-const MATCH_SETS = [
-  {
-    title:'ABG findings → condition',
-    pairs:[
-      {left:'pH↓, PaCO₂↑, HCO₃ normal', right:'Acute respiratory acidosis'},
-      {left:'pH↓, PaCO₂↑, HCO₃↑', right:'Chronic resp. acidosis (COPD)'},
-      {left:'pH↑, PaCO₂↓, HCO₃ normal', right:'Acute respiratory alkalosis'},
-      {left:'pH↓, HCO₃↓, PaCO₂↓', right:'Metabolic acidosis + compensation'},
-      {left:'Low PaO₂, high A–a gradient', right:'Shunt / V/Q mismatch'},
-    ]
-  },
-  {
-    title:'Vital sign → definition',
-    pairs:[
-      {left:'RR > 20/min', right:'Tachypnea'},
-      {left:'HR > 100/min', right:'Tachycardia'},
-      {left:'BP drop > 10 mmHg on inspiration', right:'Pulsus paradoxus'},
-      {left:'RR < 10/min', right:'Bradypnea'},
-      {left:'Alternating strong/weak pulses', right:'Pulsus alternans'},
-    ]
-  },
+ 
+const MATCH_SETS=[
+{title:'ABG findings -> condition',
+pairs:[
+{left:'pH low, PaCO2 high, HCO3 normal',right:'Acute respiratory acidosis'},
+{left:'pH low, PaCO2 high, HCO3 high',right:'Chronic resp. acidosis (COPD)'},
+{left:'pH high, PaCO2 low, HCO3 normal',right:'Acute respiratory alkalosis'},
+{left:'pH low, HCO3 low, PaCO2 low',right:'Metabolic acidosis + compensation'},
+{left:'Low PaO2, high A-a gradient',right:'Shunt / V/Q mismatch'},
+]},
+{title:'Vital sign term -> definition',
+pairs:[
+{left:'RR > 20/min',right:'Tachypnea'},
+{left:'HR > 100/min',right:'Tachycardia'},
+{left:'BP drop >10 mmHg on inspiration',right:'Pulsus paradoxus'},
+{left:'RR < 10/min',right:'Bradypnea'},
+{left:'Alternating strong/weak pulses',right:'Pulsus alternans'},
+]},
+{title:'Lab finding -> clinical meaning',
+pairs:[
+{left:'WBC > 10,000',right:'Bacterial infection'},
+{left:'WBC < 5,000',right:'Viral infection'},
+{left:'Hb < 12 g/dL',right:'Anemia'},
+{left:'Eosinophils elevated',right:'Asthma / allergic reaction'},
+{left:'Creatinine elevated',right:'Kidney failure'},
+]},
 ];
-
-const REF_DATA = [
-  {name:'Respiratory Rate',val:'12–18/min',cls:'vr-ok'},
-  {name:'Tidal Volume',val:'6 mL/kg PBW',cls:'vr-ok'},
-  {name:'Minute Ventilation',val:'5–10 L/min',cls:'vr-ok'},
-  {name:'PaCO₂',val:'35–45 mmHg',cls:'vr-ok'},
-  {name:'PaO₂',val:'80–100 mmHg',cls:'vr-ok'},
-  {name:'pH',val:'7.35–7.45',cls:'vr-ok'},
-  {name:'HCO₃⁻',val:'22–26 mEq/L',cls:'vr-ok'},
-  {name:'SpO₂ / SaO₂',val:'95–100%',cls:'vr-ok'},
-  {name:'CaO₂',val:'17–20 mL/dL',cls:'vr-ok'},
-  {name:'A–a gradient',val:'5–10 mmHg',cls:'vr-ok'},
-  {name:'VD/VT ratio',val:'0.2–0.4',cls:'vr-ok'},
-  {name:'P/F Ratio (normal)',val:'> 350',cls:'vr-ok'},
-  {name:'P/F impairment',val:'< 300',cls:'vr-warn'},
-  {name:'P/F severe ARDS',val:'< 100',cls:'vr-danger'},
-  {name:'pH acidemia',val:'< 7.35',cls:'vr-danger'},
-  {name:'pH alkalemia',val:'> 7.45',cls:'vr-warn'},
-  {name:'PaCO₂ resp. acid',val:'> 45 mmHg',cls:'vr-danger'},
-  {name:'PaCO₂ resp. alk',val:'< 35 mmHg',cls:'vr-warn'},
-  {name:'HCO₃ met. acidosis',val:'< 22 mEq/L',cls:'vr-danger'},
-  {name:'HCO₃ met. alkalosis',val:'> 26 mEq/L',cls:'vr-warn'},
-  {name:'Hemoglobin',val:'12–16 g/dL',cls:'vr-ok'},
-  {name:'Hematocrit',val:'40–50%',cls:'vr-ok'},
-  {name:'WBC',val:'5,000–10,000/mm³',cls:'vr-ok'},
-  {name:'Potassium (K⁺)',val:'3.5–4.5 mEq/L',cls:'vr-ok'},
-  {name:'Sodium (Na⁺)',val:'135–145 mEq/L',cls:'vr-ok'},
-  {name:'Chloride (Cl⁻)',val:'90–100 mEq/L',cls:'vr-ok'},
-  {name:'Creatinine',val:'0.7–1.3 mg/dL',cls:'vr-ok'},
-  {name:'BUN',val:'8–25 mg/dL',cls:'vr-ok'},
-  {name:'Pplat (vent)',val:'< 30 cm H₂O',cls:'vr-ok'},
-  {name:'Driving pressure',val:'≤ 15 cm H₂O',cls:'vr-ok'},
+ 
+const REF_DATA=[
+{name:'Respiratory Rate',val:'12-18/min',cls:'vr-ok'},
+{name:'Tidal Volume',val:'6 mL/kg PBW',cls:'vr-ok'},
+{name:'Minute Ventilation',val:'5-10 L/min',cls:'vr-ok'},
+{name:'PaCO2',val:'35-45 mmHg',cls:'vr-ok'},
+{name:'PaO2',val:'80-100 mmHg',cls:'vr-ok'},
+{name:'pH',val:'7.35-7.45',cls:'vr-ok'},
+{name:'HCO3-',val:'22-26 mEq/L',cls:'vr-ok'},
+{name:'SpO2 / SaO2',val:'95-100%',cls:'vr-ok'},
+{name:'CaO2',val:'17-20 mL/dL',cls:'vr-ok'},
+{name:'A-a gradient',val:'5-10 mmHg',cls:'vr-ok'},
+{name:'VD/VT ratio',val:'0.2-0.4',cls:'vr-ok'},
+{name:'P/F Ratio (normal)',val:'> 350',cls:'vr-ok'},
+{name:'P/F impairment',val:'< 300',cls:'vr-warn'},
+{name:'P/F severe ARDS',val:'< 100',cls:'vr-danger'},
+{name:'pH acidemia',val:'< 7.35',cls:'vr-danger'},
+{name:'pH alkalemia',val:'> 7.45',cls:'vr-warn'},
+{name:'PaCO2 resp acidosis',val:'> 45 mmHg',cls:'vr-danger'},
+{name:'PaCO2 resp alkalosis',val:'< 35 mmHg',cls:'vr-warn'},
+{name:'HCO3 met acidosis',val:'< 22 mEq/L',cls:'vr-danger'},
+{name:'HCO3 met alkalosis',val:'> 26 mEq/L',cls:'vr-warn'},
+{name:'Hemoglobin',val:'12-16 g/dL',cls:'vr-ok'},
+{name:'Hematocrit',val:'40-50%',cls:'vr-ok'},
+{name:'WBC',val:'5,000-10,000/mm3',cls:'vr-ok'},
+{name:'Potassium (K+)',val:'3.5-4.5 mEq/L',cls:'vr-ok'},
+{name:'Sodium (Na+)',val:'135-145 mEq/L',cls:'vr-ok'},
+{name:'Chloride (Cl-)',val:'90-100 mEq/L',cls:'vr-ok'},
+{name:'Creatinine',val:'0.7-1.3 mg/dL',cls:'vr-ok'},
+{name:'BUN',val:'8-25 mg/dL',cls:'vr-ok'},
+{name:'Pplat (ventilator)',val:'< 30 cm H2O',cls:'vr-ok'},
+{name:'Driving pressure',val:'<= 15 cm H2O',cls:'vr-ok'},
+{name:'Heart rate',val:'60-100 beats/min',cls:'vr-ok'},
+{name:'Blood pressure',val:'< 120/80 mmHg',cls:'vr-ok'},
+{name:'Body temperature',val:'37 C (98.6 F)',cls:'vr-ok'},
 ];
-
-const VITALS_DATA = [
-  {param:'Body Temperature', normal:'37°C (98.6°F)', high:'Hyperthermia/fever > 38.3°C (101°F) — ↑ O₂ demand, ↑ HR, ↑ RR', low:'Hypothermia — ↓ O₂ consumption, ↓ HR, slow shallow breathing', notes:'Fever causes: infection, drug reaction, malignancy, PE, burns. Rectal = most accurate site.'},
-  {param:'Pulse Rate', normal:'60–100 beats/min', high:'Tachycardia > 100 — causes: exercise, fever, hypoxemia, hypercapnia, anxiety, anemia', low:'Bradycardia < 60 — causes: hypothermia, brain injury, spinal cord injury, opiates', notes:'Pulsus paradoxus: BP drops > 10 mmHg on inspiration — seen in COPD/asthma exacerbations. Pulsus alternans: left heart failure.'},
-  {param:'Respiratory Rate', normal:'12–18 breaths/min (some sources 12–20)', high:'Tachypnea > 20 — causes: hypoxemia, hypercapnia, fever, metabolic acidosis, anxiety, pain', low:'Bradypnea < 10 — causes: brain injury, opiates, hypothermia, anesthesia', notes:'Count for a full minute; count immediately after pulse to avoid patient awareness artificially raising rate.'},
-  {param:'Blood Pressure', normal:'Systolic < 120; Diastolic < 80 mmHg', high:'Hypertension > 140/90 — essential (90% unknown cause) → risk of CNS damage, CHF', low:'Hypotension: systolic < 90 or MAP < 65 — hypovolemia, septic shock, heart failure', notes:'Stage 1 HTN: 130–139/80–89. Stage 2: > 140/90. Postural hypotension: drops when standing.'},
-  {param:'Pulse Oximetry (SpO₂)', normal:'95–100%', high:'Hyperoxemia: give unnecessary O₂ → decrease FiO₂', low:'Hypoxemia < 90% — increase FiO₂, apply PEEP, reposition. COPD goal SpO₂: 88–92%', notes:'SpO₂ can be falsely normal with anemia — check CaO₂. Unreliable with poor perfusion, nail polish, motion artifact.'},
+ 
+const VITALS_DATA=[
+{param:'Body Temperature',normal:'37 C (98.6 F)',high:'Hyperthermia/fever > 38.3 C (101 F) -- increased O2 demand, increased HR and RR; complicates COPD management',low:'Hypothermia -- decreased O2 consumption, slow shallow breathing, reduced HR',notes:'Causes of fever: bacterial/viral/fungal infection, drug reactions, malignancies, pulmonary embolism, burns. Most accurate measurement site: rectal.'},
+{param:'Pulse Rate',normal:'60-100 beats/min with regular rhythm',high:'Tachycardia > 100 -- causes: exercise, fever, hypoxemia, hypercapnia, anxiety, anemia, certain meds',low:'Bradycardia < 60 -- causes: hypothermia, brain/spinal cord injury, opiates, certain cardiac drugs',notes:'Pulsus Paradoxus: BP drops >10 mmHg on inspiration -- seen in COPD and asthma exacerbations (large negative intrathoracic pressure). Pulsus Alternans: alternating strong/weak pulses -- left heart failure.'},
+{param:'Respiratory Rate',normal:'12-18 breaths/min (resting adult)',high:'Tachypnea > 20 -- causes: hypoxemia, hypercapnia, fever, metabolic acidosis, pulmonary edema, lung fibrosis, anxiety, pain',low:'Bradypnea < 10 -- causes: brain injury, opiates, hypothermia, anesthesia, narcotic overdose',notes:'Count for a full minute. Count immediately after checking pulse (keep fingers on wrist) so patient does not become aware and artificially change their rate.'},
+{param:'Blood Pressure',normal:'Systolic < 120 mmHg; Diastolic < 80 mmHg; Pulse pressure: 30-40 mmHg',high:'Hypertension -- Stage 1: 130-139/80-89; Stage 2: >140/90. Causes: ~90% unknown (essential). Risk: CNS damage, CHF, cerebral hemorrhage.',low:'Hypotension: systolic < 90 OR MAP < 65. Causes: hypovolemia, septic shock, heart failure, anaphylaxis',notes:'Postural hypotension: BP drops when standing -- treat with fluids. For low BP, palpate carotid or femoral pulse; avoid carotid sinus to prevent bradycardia.'},
+{param:'Pulse Oximetry (SpO2)',normal:'95-100%',high:'Hyperoxemia: unnecessarily high FiO2 -- reduce to titrate to target. COPD target: SpO2 88-92%.',low:'Hypoxemia < 90% -- increase FiO2, apply PEEP/CPAP, reposition. Investigate underlying cause.',notes:'SpO2 can be falsely normal in anemia (check CaO2). Unreliable with poor perfusion, nail polish, motion artifact, carbon monoxide poisoning (CO-oximetry needed).'},
 ];
-
-const TIPS = [
-  {icon:'ti ti-refresh', title:'Spaced repetition — the #1 technique', body:'Instead of cramming, review material at increasing intervals: today, tomorrow, in 3 days, in 1 week, in 2 weeks. Use the flashcard "Got it / Again" buttons to build your own SRS-style loop. Your brain consolidates memory during sleep — review before bed.'},
-  {icon:'ti ti-pencil', title:'Active recall over passive re-reading', body:'Re-reading your notes feels productive but doesn\'t build retrieval pathways. Use the Fill-in-Blank and Flashcard modes instead. Every time you struggle to retrieve an answer — even if you get it wrong — you strengthen the memory far more than reading it.'},
-  {icon:'ti ti-chart-line', title:'Interleave topics — don\'t block study', body:'Don\'t study "all normal values → all formulas → all ABG." Instead, mix them. Use the full flashcard deck (all categories shuffled). This forces your brain to distinguish between concepts, building stronger discrimination — exactly what the NBRC tests.'},
-  {icon:'ti ti-math', title:'Do the math by hand — every time', body:'Normal values are memorized. Formulas must be automated. Write out <code>VE = RR × VT</code>, <code>VA = (VT − VD) × RR</code>, and <code>CaO₂ = (Hb × 1.34 × SaO₂) + (PaO₂ × 0.003)</code> from memory every day until they flow automatically. The Formula Calculator here lets you verify your mental math instantly.'},
-  {icon:'ti ti-brain', title:'Teach it back — the Feynman technique', body:'After each flashcard set, close the app and explain the concept out loud as if you\'re teaching it to a patient\'s family. Example: "PaCO₂ tells us how well you\'re breathing out CO₂. When it\'s too high, it means you\'re not breathing deeply enough, which makes your blood too acidic." If you stumble, go back and re-learn that card.'},
-  {icon:'ti ti-stethoscope', title:'Always think in clinical frames', body:'Never memorize a value in isolation. For every value, ask: "What would I do if this were abnormal?" PaCO₂ 55 → respiratory acidosis → increase ventilation. P/F ratio 150 → significant oxygenation failure → PEEP. ABG → always: pH → CO₂ → HCO₃ → PaO₂. Use the Clinical Cases mode to automate this thinking.'},
-  {icon:'ti ti-calendar', title:'Daily minimum: 10 minutes', body:'Ten focused minutes of active recall every day beats 2 hours of passive reading once a week. Suggested daily routine: 5 min flashcards → 2 min fill-in-blank → 3 min mentally rehearsing ABG interpretation on a random ABG (use the interpreter tool). Consistency is the mechanism of mastery.'},
-  {icon:'ti ti-layers', title:'Build a mental map of the 3 layers', body:'Layer 1 (Know It): What is the normal PaCO₂? Layer 2 (Apply It): This patient has RR 24 and VT 300 — what is VA? Layer 3 (Decide With It): VA is 2.4 L/min and pH is 7.22 — what should I recommend? Every time you study, push past Layer 1. The NBRC will ask Layer 2 and 3 questions almost exclusively.'},
-  {icon:'ti ti-link', title:'Make acronym anchors', body:'RT decisions: <code>A-I-D-R</code> = Assess, Interpret, Decide, Reassess. ABG steps: <code>P-C-B-O</code> = pH, CO₂, Bicarb, Oxygenation. Oxygenation failure markers: <code>LSP-H</code> = Low PaO₂, Low SpO₂, Poor P/F, High A-a. Ventilation failure: <code>High CO₂, Low pH, Low VA</code>. Create one more of your own and write it down.'},
-  {icon:'ti ti-clock', title:'Use the "closing the laptop" test', body:'After any study session, close everything and write down every formula, normal value, and clinical decision rule you just studied — from memory only. What you can\'t write is what you don\'t actually know yet. This diagnostic step is more valuable than any re-reading session.'},
+ 
+const TIPS=[
+{icon:'ti ti-refresh',title:'Spaced repetition -- the #1 technique',body:'Review material at increasing intervals: today, tomorrow, in 3 days, in 1 week, in 2 weeks. Use the flashcard "Got it / Again" buttons to track what you know. Your brain consolidates memory during sleep -- review before bed for best retention.'},
+{icon:'ti ti-pencil',title:'Active recall over passive re-reading',body:'Re-reading notes feels productive but does not build retrieval pathways. Use the Fill-in-Blank and Flashcard modes instead. Every time you struggle to retrieve an answer -- even if you get it wrong -- you strengthen the memory far more than reading it again.'},
+{icon:'ti ti-chart-line',title:'Interleave topics -- do not block study',body:'Do not study all normal values, then all formulas, then all ABG. Mix them. Use the full flashcard deck (all categories shuffled). This forces your brain to distinguish between concepts -- exactly what the NBRC tests.'},
+{icon:'ti ti-math',title:'Do the math by hand every time',body:'Normal values are memorized. Formulas must be automated. Write out <code>VE = RR x VT</code>, <code>VA = (VT - VD) x RR</code>, and <code>CaO2 = (Hb x 1.34 x SaO2) + (PaO2 x 0.003)</code> from memory every day until they flow automatically. Use the Formula Calculator here to verify your mental math.'},
+{icon:'ti ti-brain',title:'Teach it back -- the Feynman technique',body:'After each flashcard set, close the app and explain the concept out loud as if teaching a patient\'s family. Example: "PaCO2 tells us how well you breathe out CO2. When it is too high, it means you are not breathing deeply enough, which makes your blood too acidic." If you stumble, go back and re-learn that card.'},
+{icon:'ti ti-stethoscope',title:'Always think in clinical frames',body:'Never memorize a value in isolation. For every value, ask: "What would I do if this were abnormal?" PaCO2 55 -> respiratory acidosis -> increase ventilation. P/F 150 -> significant oxygenation failure -> PEEP. ABG always follows: pH -> CO2 -> HCO3 -> PaO2. Use Clinical Cases to automate this thinking.'},
+{icon:'ti ti-calendar',title:'Daily minimum: 10 minutes',body:'Ten focused minutes of active recall every day beats 2 hours of passive reading once a week. Suggested daily routine: 5 min flashcards -> 2 min fill-in-blank -> 3 min mentally rehearsing ABG interpretation. Consistency is the mechanism of mastery.'},
+{icon:'ti ti-layers',title:'Build a mental map of the 3 layers',body:'Layer 1 (Know It): What is the normal PaCO2? Layer 2 (Apply It): This patient has RR 24 and VT 300 -- what is VA? Layer 3 (Decide With It): VA is 2.4 L/min and pH is 7.22 -- what should I recommend? Push past Layer 1 every session. The NBRC tests Layers 2 and 3 almost exclusively.'},
+{icon:'ti ti-link',title:'Make acronym anchors',body:'RT framework: <code>A-I-D-R</code> = Assess, Interpret, Decide, Reassess. ABG steps: <code>P-C-B-O</code> = pH, CO2, Bicarb, Oxygenation. Oxygenation failure: <code>LSP-H</code> = Low PaO2, Low SpO2, Poor P/F, High A-a. Ventilation failure: <code>High CO2, Low pH, Low VA</code>. Create your own acronym and write it down.'},
+{icon:'ti ti-clock',title:'The "closing the laptop" test',body:'After any study session, close everything and write from memory every formula, normal value, and clinical decision rule you just studied. What you cannot write is what you do not actually know yet. This diagnostic step is more valuable than any re-reading session.'},
 ];
-
-/* ════════════════════════════════════════════════
-   NAVIGATION
-════════════════════════════════════════════════ */
-function goHome(){
-  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
-  document.getElementById('home-screen').classList.add('active');
-}
-function showScreen(id){
-  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
-  document.getElementById(id).classList.add('active');
-  window.scrollTo(0,0);
-}
-
-/* ════════════════════════════════════════════════
-   FLASHCARDS
-════════════════════════════════════════════════ */
-let fcIdx=0, fcGot=0, fcCards=[];
-function shuffle(arr){ return [...arr].sort(()=>Math.random()-0.5); }
+ 
+/* ── NAVIGATION ── */
+function goHome(){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById('home-screen').classList.add('active')}
+function showScreen(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById(id).classList.add('active');window.scrollTo(0,0)}
+function shuffle(a){return [...a].sort(()=>Math.random()-.5)}
+ 
+/* ── FLASHCARDS ── */
+let fcIdx=0,fcGot=0,fcCards=[];
 function startFlashcards(){
-  fcCards=shuffle(CARDS); fcIdx=0; fcGot=0;
+  fcCards=shuffle(CARDS);fcIdx=0;fcGot=0;
   document.getElementById('fc-done').style.display='none';
   document.getElementById('fc-wrap').style.display='';
-  document.getElementById('fc-hint-txt').style.display='';
+  document.getElementById('fc-hint').style.display='';
   document.getElementById('fc-actions').style.display='none';
-  showScreen('flash-screen');
-  renderCard();
+  showScreen('flash-screen');renderCard();
 }
 function renderCard(){
   const c=fcCards[fcIdx];
-  document.getElementById('flash-progress').style.width=Math.round((fcIdx/fcCards.length)*100)+'%';
+  document.getElementById('flash-progress').style.width=Math.round(fcIdx/fcCards.length*100)+'%';
   document.getElementById('flash-counter').textContent=(fcIdx+1)+' / '+fcCards.length;
   document.getElementById('fc-tag').textContent=c.tag;
   document.getElementById('fc-q').textContent=c.q;
@@ -724,279 +666,254 @@ function renderCard(){
   document.getElementById('flashcard').classList.remove('flipped');
   document.getElementById('fc-actions').style.display='none';
 }
-function flipCard(){
-  const fc=document.getElementById('flashcard');
-  fc.classList.toggle('flipped');
-  if(fc.classList.contains('flipped')) document.getElementById('fc-actions').style.display='flex';
-}
-function fcGrade(got){ if(got) fcGot++; fcIdx++; if(fcIdx>=fcCards.length){showFCDone();return;} renderCard(); }
-function fcSkip(){ fcIdx++; if(fcIdx>=fcCards.length){showFCDone();return;} renderCard(); }
+function flipCard(){const fc=document.getElementById('flashcard');fc.classList.toggle('flipped');if(fc.classList.contains('flipped'))document.getElementById('fc-actions').style.display='flex'}
+function fcGrade(got){if(got)fcGot++;fcIdx++;if(fcIdx>=fcCards.length){showFCDone();return}renderCard()}
+function fcSkip(){fcIdx++;if(fcIdx>=fcCards.length){showFCDone();return}renderCard()}
 function showFCDone(){
   document.getElementById('fc-wrap').style.display='none';
-  document.getElementById('fc-hint-txt').style.display='none';
+  document.getElementById('fc-hint').style.display='none';
   document.getElementById('fc-actions').style.display='none';
-  const pct=Math.round((fcGot/fcCards.length)*100);
+  const pct=Math.round(fcGot/fcCards.length*100);
   document.getElementById('fc-summary').textContent='You knew '+fcGot+' of '+fcCards.length+' cards ('+pct+'%).';
   document.getElementById('fc-done').style.display='block';
   document.getElementById('flash-progress').style.width='100%';
   document.getElementById('flash-counter').textContent=fcCards.length+' / '+fcCards.length;
 }
-function restartFlash(){ startFlashcards(); }
-
-/* ════════════════════════════════════════════════
-   QUIZ
-════════════════════════════════════════════════ */
-let qIdx=0, qScore=0, qAnswered=false;
+ 
+/* ── QUIZ ── */
+let qIdx=0,qScore=0,qAnswered=false;
 function startQuiz(){
-  qIdx=0; qScore=0; qAnswered=false;
+  qIdx=0;qScore=0;qAnswered=false;
   document.getElementById('quiz-done').style.display='none';
-  document.getElementById('quiz-q-area').style.display='';
-  showScreen('quiz-screen');
-  renderQuiz();
+  document.getElementById('quiz-area').style.display='';
+  showScreen('quiz-screen');renderQuiz();
 }
 function renderQuiz(){
-  document.getElementById('quiz-progress').style.width=Math.round((qIdx/QUIZ.length)*100)+'%';
+  document.getElementById('quiz-progress').style.width=Math.round(qIdx/QUIZ.length*100)+'%';
   document.getElementById('quiz-counter').textContent=(qIdx+1)+' / '+QUIZ.length;
   const q=QUIZ[qIdx];
   const opts=q.opts.map((o,i)=>`<button class="option-btn" id="opt-${i}" onclick="answerQ(${i})">${String.fromCharCode(65+i)}. ${o}</button>`).join('');
-  document.getElementById('quiz-q-area').innerHTML=`<div class="cat-badge">${q.cat}</div><div class="q-box">${q.q}</div><div class="options-grid">${opts}</div><div class="explanation" id="exp" style="display:none;"></div><button class="next-btn" id="next-btn" style="display:none;" onclick="nextQ()">Next →</button>`;
+  document.getElementById('quiz-area').innerHTML=`<div class="cat-badge">${q.cat}</div><div class="q-box">${q.q}</div><div class="options-grid">${opts}</div><div class="explanation" id="exp" style="display:none"></div><button class="next-btn" id="qnxt" style="display:none" onclick="nextQ()">Next &rarr;</button>`;
   qAnswered=false;
 }
 function answerQ(i){
-  if(qAnswered) return; qAnswered=true;
-  const q=QUIZ[qIdx]; if(i===q.ans) qScore++;
-  q.opts.forEach((_,j)=>{ const b=document.getElementById('opt-'+j); b.disabled=true; if(j===q.ans)b.classList.add('correct'); else if(j===i)b.classList.add('wrong'); });
-  document.getElementById('exp').textContent=q.exp; document.getElementById('exp').style.display='block';
-  document.getElementById('next-btn').style.display='inline-block';
+  if(qAnswered)return;qAnswered=true;
+  const q=QUIZ[qIdx];if(i===q.ans)qScore++;
+  q.opts.forEach((_,j)=>{const b=document.getElementById('opt-'+j);b.disabled=true;if(j===q.ans)b.classList.add('correct');else if(j===i)b.classList.add('wrong')});
+  document.getElementById('exp').textContent=q.exp;document.getElementById('exp').style.display='block';
+  document.getElementById('qnxt').style.display='inline-block';
 }
-function nextQ(){ qIdx++; if(qIdx>=QUIZ.length){showQuizDone();return;} renderQuiz(); }
+function nextQ(){qIdx++;if(qIdx>=QUIZ.length){showQuizDone();return}renderQuiz()}
 function showQuizDone(){
-  document.getElementById('quiz-q-area').style.display='none';
+  document.getElementById('quiz-area').style.display='none';
   document.getElementById('quiz-progress').style.width='100%';
   document.getElementById('quiz-counter').textContent=QUIZ.length+' / '+QUIZ.length;
-  const pct=Math.round((qScore/QUIZ.length)*100);
-  document.getElementById('score-arc').style.strokeDashoffset=(276.46*(1-pct/100)).toFixed(2);
-  document.getElementById('score-pct').textContent=pct+'%';
+  const pct=Math.round(qScore/QUIZ.length*100);
+  document.getElementById('q-arc').style.strokeDashoffset=(276.46*(1-pct/100)).toFixed(2);
+  document.getElementById('q-pct').textContent=pct+'%';
   const T=[['Keep studying!','Review flashcards and try again.'],['Good effort!','Solid foundation building.'],['Nice work!','Most concepts are clicking!'],['Almost there!','Just a few gaps left.'],['Expert level!','You think like a clinical RT!']];
   const t=pct<50?0:pct<65?1:pct<80?2:pct<90?3:4;
-  document.getElementById('score-title').textContent=T[t][0];
-  document.getElementById('score-sub').textContent='Score: '+qScore+'/'+QUIZ.length+' — '+T[t][1];
+  document.getElementById('q-title').textContent=T[t][0];
+  document.getElementById('q-sub').textContent='Score: '+qScore+'/'+QUIZ.length+' -- '+T[t][1];
   document.getElementById('quiz-done').style.display='block';
 }
-
-/* ════════════════════════════════════════════════
-   SCENARIOS
-════════════════════════════════════════════════ */
-let scIdx=0, scQIdx=0, scScore=0, scTotal=0;
-function startScenario(){ scIdx=0; scQIdx=0; scScore=0; scTotal=0; document.getElementById('sc-done').style.display='none'; document.getElementById('sc-area').style.display=''; showScreen('scenario-screen'); renderScenario(); }
+ 
+/* ── SCENARIOS ── */
+let scIdx=0,scQIdx=0,scScore=0,scTotal=0;
+function startScenario(){scIdx=0;scQIdx=0;scScore=0;scTotal=0;document.getElementById('sc-done').style.display='none';document.getElementById('sc-area').style.display='';showScreen('scenario-screen');renderScenario()}
 function renderScenario(){
   const sc=SCENARIOS[scIdx];
   const allQ=SCENARIOS.reduce((a,s)=>a+s.questions.length,0);
   const done=SCENARIOS.slice(0,scIdx).reduce((a,s)=>a+s.questions.length,0)+scQIdx;
-  document.getElementById('sc-progress').style.width=Math.round((done/allQ)*100)+'%';
+  document.getElementById('sc-progress').style.width=Math.round(done/allQ*100)+'%';
   document.getElementById('sc-counter').textContent='Case '+(scIdx+1)+' of '+SCENARIOS.length;
   const q=sc.questions[scQIdx];
-  const vitals=sc.vitals.map(v=>`<div class="vital-chip ${v.a?'abnormal':''}"><span>${v.v}</span>${v.l}</div>`).join('');
+  const vitals=sc.vitals.map(v=>`<div class="vital-chip ${v.a?'abn':''}"><span>${v.v}</span>${v.l}</div>`).join('');
   const opts=q.opts.map((o,i)=>`<button class="option-btn" id="sc-opt-${i}" onclick="answerSC(${i})">${String.fromCharCode(65+i)}. ${o}</button>`).join('');
   const isLast=scIdx===SCENARIOS.length-1&&scQIdx===SCENARIOS[scIdx].questions.length-1;
-  document.getElementById('sc-area').innerHTML=`<div class="scenario-box"><div class="scenario-label">Case ${scIdx+1}: ${sc.title}</div>${scQIdx===0?`<p class="scenario-story">${sc.story}</p>`:''}<div class="vitals-grid">${vitals}</div></div><div class="step-badge">Step ${scQIdx+1} of ${sc.questions.length}</div><div class="q-box">${q.q}</div><div class="options-grid">${opts}</div><div class="explanation" id="sc-exp" style="display:none;"></div><button class="next-btn" id="sc-next" style="display:none;" onclick="nextSC()">${isLast?'See results':'Next →'}</button>`;
+  document.getElementById('sc-area').innerHTML=`<div class="scenario-box"><div class="scenario-label">Case ${scIdx+1}: ${sc.title}</div>${scQIdx===0?`<p class="scenario-story">${sc.story}</p>`:''}<div class="vitals-grid">${vitals}</div></div><div class="step-badge">Step ${scQIdx+1} of ${sc.questions.length}</div><div class="q-box">${q.q}</div><div class="options-grid">${opts}</div><div class="explanation" id="sc-exp" style="display:none"></div><button class="next-btn" id="sc-nxt" style="display:none" onclick="nextSC()">${isLast?'See results':'Next &rarr;'}</button>`;
 }
-function answerSC(i){ const q=SCENARIOS[scIdx].questions[scQIdx]; scTotal++; if(i===q.ans) scScore++; q.opts.forEach((_,j)=>{ const b=document.getElementById('sc-opt-'+j); b.disabled=true; if(j===q.ans)b.classList.add('correct'); else if(j===i)b.classList.add('wrong'); }); document.getElementById('sc-exp').textContent=q.exp; document.getElementById('sc-exp').style.display='block'; document.getElementById('sc-next').style.display='inline-block'; }
-function nextSC(){ scQIdx++; if(scQIdx>=SCENARIOS[scIdx].questions.length){scIdx++;scQIdx=0;} if(scIdx>=SCENARIOS.length){showSCDone();return;} renderScenario(); }
-function showSCDone(){ document.getElementById('sc-area').style.display='none'; document.getElementById('sc-progress').style.width='100%'; const pct=Math.round((scScore/scTotal)*100); document.getElementById('sc-arc').style.strokeDashoffset=(276.46*(1-pct/100)).toFixed(2); document.getElementById('sc-pct').textContent=pct+'%'; document.getElementById('sc-sub').textContent='You got '+scScore+' of '+scTotal+' questions across '+SCENARIOS.length+' cases.'; document.getElementById('sc-done').style.display='block'; }
-
-/* ════════════════════════════════════════════════
-   FILL IN BLANK
-════════════════════════════════════════════════ */
-let fibIdx=0, fibScore=0, fibQs=[], fibAnswered=false;
-function startFIB(){ fibQs=shuffle(FIB_QUESTIONS); fibIdx=0; fibScore=0; document.getElementById('fib-done').style.display='none'; document.getElementById('fib-area').style.display=''; showScreen('fib-screen'); renderFIB(); }
+function answerSC(i){const q=SCENARIOS[scIdx].questions[scQIdx];scTotal++;if(i===q.ans)scScore++;q.opts.forEach((_,j)=>{const b=document.getElementById('sc-opt-'+j);b.disabled=true;if(j===q.ans)b.classList.add('correct');else if(j===i)b.classList.add('wrong')});document.getElementById('sc-exp').textContent=q.exp;document.getElementById('sc-exp').style.display='block';document.getElementById('sc-nxt').style.display='inline-block'}
+function nextSC(){scQIdx++;if(scQIdx>=SCENARIOS[scIdx].questions.length){scIdx++;scQIdx=0}if(scIdx>=SCENARIOS.length){showSCDone();return}renderScenario()}
+function showSCDone(){document.getElementById('sc-area').style.display='none';document.getElementById('sc-progress').style.width='100%';const pct=Math.round(scScore/scTotal*100);document.getElementById('sc-arc').style.strokeDashoffset=(276.46*(1-pct/100)).toFixed(2);document.getElementById('sc-pct').textContent=pct+'%';document.getElementById('sc-sub').textContent='You got '+scScore+' of '+scTotal+' questions across '+SCENARIOS.length+' cases.';document.getElementById('sc-done').style.display='block'}
+ 
+/* ── FILL IN BLANK ── */
+let fibIdx=0,fibScore=0,fibQs=[],fibAnswered=false;
+function startFIB(){fibQs=shuffle(FIBS);fibIdx=0;fibScore=0;document.getElementById('fib-done').style.display='none';document.getElementById('fib-area').style.display='';showScreen('fib-screen');renderFIB()}
 function renderFIB(){
-  document.getElementById('fib-progress').style.width=Math.round((fibIdx/fibQs.length)*100)+'%';
+  document.getElementById('fib-progress').style.width=Math.round(fibIdx/fibQs.length*100)+'%';
   document.getElementById('fib-counter').textContent=(fibIdx+1)+' / '+fibQs.length;
   const q=fibQs[fibIdx];
-  document.getElementById('fib-area').innerHTML=`<div class="cat-badge">${q.cat}</div><div class="q-box" style="font-size:17px;font-weight:600;">${q.prompt}</div><p class="fib-hint">Hint: ${q.hint}</p><input class="fib-input" id="fib-inp" type="text" placeholder="Type your answer…" autocomplete="off" onkeydown="if(event.key==='Enter')checkFIB()"><div style="display:flex;align-items:center;gap:8px;"><button class="check-btn" onclick="checkFIB()">Check</button><button class="show-ans-btn" onclick="showFIBAns()">Show answer</button></div><div class="explanation" id="fib-exp" style="display:none;"></div><button class="next-btn" id="fib-next" style="display:none;" onclick="nextFIB()">${fibIdx===fibQs.length-1?'See results':'Next →'}</button>`;
+  document.getElementById('fib-area').innerHTML=`<div class="cat-badge">${q.cat}</div><div class="q-box" style="font-size:17px;font-weight:600">${q.prompt}</div><p class="fib-hint">Hint: ${q.hint}</p><input class="fib-input" id="fib-inp" type="text" placeholder="Type your answer..." autocomplete="off" onkeydown="if(event.key==='Enter')checkFIB()"><div style="display:flex;align-items:center;gap:8px"><button class="check-btn" onclick="checkFIB()">Check</button><button class="show-ans" onclick="showFIBAns()">Show answer</button></div><div class="explanation" id="fib-exp" style="display:none"></div><button class="next-btn" id="fib-nxt" style="display:none" onclick="nextFIB()">${fibIdx===fibQs.length-1?'See results':'Next &rarr;'}</button>`;
   document.getElementById('fib-inp').focus();
   fibAnswered=false;
 }
 function checkFIB(){
-  if(fibAnswered) return;
-  const q=fibQs[fibIdx]; const inp=document.getElementById('fib-inp'); const val=inp.value.trim().toLowerCase().replace(/\s+/g,' ');
-  const ok=q.ans.some(a=>val===a||val.includes(a));
-  if(ok){ fibScore++; inp.classList.add('correct-input'); document.getElementById('fib-exp').innerHTML='<strong>Correct!</strong> Full answer: '+q.display; }
-  else { inp.classList.add('wrong-input'); document.getElementById('fib-exp').innerHTML='Not quite. Correct answer: <strong>'+q.display+'</strong>'; }
+  if(fibAnswered)return;fibAnswered=true;
+  const q=fibQs[fibIdx];const inp=document.getElementById('fib-inp');const val=inp.value.trim().toLowerCase().replace(/\s+/g,' ');
+  const good=q.ans.some(a=>val===a||val.includes(a));
+  if(good){fibScore++;inp.classList.add('ok');document.getElementById('fib-exp').innerHTML='<strong>Correct!</strong> Full answer: '+q.display}
+  else{inp.classList.add('err');document.getElementById('fib-exp').innerHTML='Not quite. Correct answer: <strong>'+q.display+'</strong>'}
   document.getElementById('fib-exp').style.display='block';
-  document.getElementById('fib-next').style.display='inline-block';
-  fibAnswered=true;
+  document.getElementById('fib-nxt').style.display='inline-block';
 }
-function showFIBAns(){ if(fibAnswered) return; fibAnswered=true; const q=fibQs[fibIdx]; const inp=document.getElementById('fib-inp'); inp.classList.add('wrong-input'); document.getElementById('fib-exp').innerHTML='Answer: <strong>'+q.display+'</strong>'; document.getElementById('fib-exp').style.display='block'; document.getElementById('fib-next').style.display='inline-block'; }
-function nextFIB(){ fibIdx++; if(fibIdx>=fibQs.length){showFIBDone();return;} renderFIB(); }
-function showFIBDone(){ document.getElementById('fib-area').style.display='none'; document.getElementById('fib-progress').style.width='100%'; const pct=Math.round((fibScore/fibQs.length)*100); document.getElementById('fib-arc').style.strokeDashoffset=(276.46*(1-pct/100)).toFixed(2); document.getElementById('fib-pct').textContent=pct+'%'; document.getElementById('fib-sub').textContent='You got '+fibScore+' of '+fibQs.length+' correct ('+pct+'%).'; document.getElementById('fib-done').style.display='block'; }
-
-/* ════════════════════════════════════════════════
-   FORMULA CALCULATOR
-════════════════════════════════════════════════ */
-function startFormulas(){ showScreen('formula-screen'); renderFormulas(); }
+function showFIBAns(){if(fibAnswered)return;fibAnswered=true;const q=fibQs[fibIdx];document.getElementById('fib-inp').classList.add('err');document.getElementById('fib-exp').innerHTML='Answer: <strong>'+q.display+'</strong>';document.getElementById('fib-exp').style.display='block';document.getElementById('fib-nxt').style.display='inline-block'}
+function nextFIB(){fibIdx++;if(fibIdx>=fibQs.length){showFIBDone();return}renderFIB()}
+function showFIBDone(){document.getElementById('fib-area').style.display='none';document.getElementById('fib-progress').style.width='100%';const pct=Math.round(fibScore/fibQs.length*100);document.getElementById('fib-arc').style.strokeDashoffset=(276.46*(1-pct/100)).toFixed(2);document.getElementById('fib-pct').textContent=pct+'%';document.getElementById('fib-sub').textContent='You got '+fibScore+' of '+fibQs.length+' correct ('+pct+'%).';document.getElementById('fib-done').style.display='block'}
+ 
+/* ── FORMULA CALCULATOR ── */
+function startFormulas(){showScreen('formula-screen');renderFormulas()}
 function renderFormulas(){
   document.getElementById('formula-area').innerHTML=`
-  <div class="formula-card">
-    <div class="formula-name">Minute Ventilation</div>
-    <div class="formula-display">VE = RR × VT</div>
-    <div class="formula-inputs">
-      <div class="formula-field"><label>RR (breaths/min)</label><input type="number" id="f1-rr" placeholder="e.g. 14" oninput="calcVE()"></div>
-      <div class="formula-field"><label>VT (mL)</label><input type="number" id="f1-vt" placeholder="e.g. 500" oninput="calcVE()"></div>
-    </div>
-    <div class="formula-result" id="f1-res">Enter values above</div>
+<div class="formula-card">
+  <div class="formula-name">Minute Ventilation</div>
+  <div class="formula-display">VE = RR x VT</div>
+  <div class="formula-inputs">
+    <div class="ff"><label>RR (breaths/min)</label><input type="number" id="f1r" placeholder="e.g. 14" oninput="calcVE()"></div>
+    <div class="ff"><label>VT (mL)</label><input type="number" id="f1v" placeholder="e.g. 500" oninput="calcVE()"></div>
   </div>
-  <div class="formula-card">
-    <div class="formula-name">Alveolar Ventilation</div>
-    <div class="formula-display">VA = (VT − VD) × RR</div>
-    <div class="formula-inputs">
-      <div class="formula-field"><label>VT (mL)</label><input type="number" id="f2-vt" placeholder="e.g. 500" oninput="calcVA()"></div>
-      <div class="formula-field"><label>VD (mL)</label><input type="number" id="f2-vd" placeholder="e.g. 150" oninput="calcVA()"></div>
-      <div class="formula-field"><label>RR (breaths/min)</label><input type="number" id="f2-rr" placeholder="e.g. 12" oninput="calcVA()"></div>
-    </div>
-    <div class="formula-result" id="f2-res">Enter values above</div>
+  <div class="formula-result" id="f1res">Enter values above</div>
+</div>
+<div class="formula-card">
+  <div class="formula-name">Alveolar Ventilation</div>
+  <div class="formula-display">VA = (VT - VD) x RR</div>
+  <div class="formula-inputs">
+    <div class="ff"><label>VT (mL)</label><input type="number" id="f2vt" placeholder="e.g. 500" oninput="calcVA()"></div>
+    <div class="ff"><label>VD (mL)</label><input type="number" id="f2vd" placeholder="e.g. 150" oninput="calcVA()"></div>
+    <div class="ff"><label>RR (breaths/min)</label><input type="number" id="f2rr" placeholder="e.g. 12" oninput="calcVA()"></div>
   </div>
-  <div class="formula-card">
-    <div class="formula-name">Arterial Oxygen Content</div>
-    <div class="formula-display">CaO₂ = (Hb × 1.34 × SaO₂) + (PaO₂ × 0.003)</div>
-    <div class="formula-inputs">
-      <div class="formula-field"><label>Hb (g/dL)</label><input type="number" id="f3-hb" step="0.1" placeholder="e.g. 14" oninput="calcCaO2()"></div>
-      <div class="formula-field"><label>SaO₂ (0–1)</label><input type="number" id="f3-sao2" step="0.01" placeholder="e.g. 0.97" oninput="calcCaO2()"></div>
-      <div class="formula-field"><label>PaO₂ (mmHg)</label><input type="number" id="f3-pao2" placeholder="e.g. 90" oninput="calcCaO2()"></div>
-    </div>
-    <div class="formula-result" id="f3-res">Enter values above</div>
+  <div class="formula-result" id="f2res">Enter values above</div>
+</div>
+<div class="formula-card">
+  <div class="formula-name">Arterial Oxygen Content</div>
+  <div class="formula-display">CaO2 = (Hb x 1.34 x SaO2) + (PaO2 x 0.003)</div>
+  <div class="formula-inputs">
+    <div class="ff"><label>Hb (g/dL)</label><input type="number" id="f3h" step="0.1" placeholder="e.g. 14" oninput="calcCaO2()"></div>
+    <div class="ff"><label>SaO2 (0-1)</label><input type="number" id="f3s" step="0.01" placeholder="e.g. 0.97" oninput="calcCaO2()"></div>
+    <div class="ff"><label>PaO2 (mmHg)</label><input type="number" id="f3p" placeholder="e.g. 90" oninput="calcCaO2()"></div>
   </div>
-  <div class="formula-card">
-    <div class="formula-name">P/F Ratio</div>
-    <div class="formula-display">P/F = PaO₂ ÷ FiO₂</div>
-    <div class="formula-inputs">
-      <div class="formula-field"><label>PaO₂ (mmHg)</label><input type="number" id="f4-pao2" placeholder="e.g. 80" oninput="calcPF()"></div>
-      <div class="formula-field"><label>FiO₂ (0.21–1.0)</label><input type="number" id="f4-fio2" step="0.01" placeholder="e.g. 0.40" oninput="calcPF()"></div>
-    </div>
-    <div class="formula-result" id="f4-res">Enter values above</div>
+  <div class="formula-result" id="f3res">Enter values above</div>
+</div>
+<div class="formula-card">
+  <div class="formula-name">P/F Ratio</div>
+  <div class="formula-display">P/F = PaO2 / FiO2</div>
+  <div class="formula-inputs">
+    <div class="ff"><label>PaO2 (mmHg)</label><input type="number" id="f4p" placeholder="e.g. 80" oninput="calcPF()"></div>
+    <div class="ff"><label>FiO2 (0.21-1.0)</label><input type="number" id="f4f" step="0.01" placeholder="e.g. 0.40" oninput="calcPF()"></div>
   </div>
-  <div class="formula-card">
-    <div class="formula-name">PAO₂ (Simplified Alveolar Air Equation)</div>
-    <div class="formula-display">PAO₂ = 150 − (1.25 × PaCO₂)</div>
-    <div class="formula-inputs">
-      <div class="formula-field"><label>PaCO₂ (mmHg)</label><input type="number" id="f5-co2" placeholder="e.g. 40" oninput="calcPAO2()"></div>
-    </div>
-    <div class="formula-result" id="f5-res">Enter values above</div>
+  <div class="formula-result" id="f4res">Enter values above</div>
+</div>
+<div class="formula-card">
+  <div class="formula-name">PAO2 (Simplified Alveolar Air Equation)</div>
+  <div class="formula-display">PAO2 = 150 - (1.25 x PaCO2)</div>
+  <div class="formula-inputs">
+    <div class="ff"><label>PaCO2 (mmHg)</label><input type="number" id="f5c" placeholder="e.g. 40" oninput="calcPAO2()"></div>
   </div>
-  <div class="formula-card">
-    <div class="formula-name">Predicted Body Weight</div>
-    <div class="formula-display">PBW = 50/45.5 + 2.3 × (ht_inches − 60)</div>
-    <div class="formula-inputs">
-      <div class="formula-field"><label>Height (inches)</label><input type="number" id="f6-ht" placeholder="e.g. 65" oninput="calcPBW()"></div>
-      <div class="formula-field"><label>Sex</label><select id="f6-sex" onchange="calcPBW()" style="border:0.5px solid var(--border2);background:var(--bg2);border-radius:var(--radius-md);padding:9px 12px;font-size:14px;color:var(--text);outline:none;"><option value="m">Male</option><option value="f">Female</option></select></div>
-    </div>
-    <div class="formula-result" id="f6-res">Enter values above</div>
-  </div>`;
+  <div class="formula-result" id="f5res">Enter values above</div>
+</div>
+<div class="formula-card">
+  <div class="formula-name">Predicted Body Weight</div>
+  <div class="formula-display">PBW = 50/45.5 + 2.3 x (ht_in - 60)</div>
+  <div class="formula-inputs">
+    <div class="ff"><label>Height (inches)</label><input type="number" id="f6h" placeholder="e.g. 65" oninput="calcPBW()"></div>
+    <div class="ff"><label>Sex</label><select id="f6s" onchange="calcPBW()" style="border:.5px solid var(--border2);background:var(--bg2);border-radius:var(--r-md);padding:9px 10px;font-size:14px;color:var(--text);outline:none"><option value="m">Male</option><option value="f">Female</option></select></div>
+  </div>
+  <div class="formula-result" id="f6res">Enter values above</div>
+</div>`;
 }
-function calcVE(){ const r=parseFloat(document.getElementById('f1-rr').value),v=parseFloat(document.getElementById('f1-vt').value); if(isNaN(r)||isNaN(v)){document.getElementById('f1-res').textContent='Enter values above';return;} const ve=(r*v/1000).toFixed(2); const ok=ve>=5&&ve<=10; document.getElementById('f1-res').innerHTML=`VE = ${ve} L/min ${ok?'✓ normal (5–10 L/min)':'⚠ outside normal range (5–10 L/min)'}`;  }
-function calcVA(){ const vt=parseFloat(document.getElementById('f2-vt').value),vd=parseFloat(document.getElementById('f2-vd').value),rr=parseFloat(document.getElementById('f2-rr').value); if(isNaN(vt)||isNaN(vd)||isNaN(rr)){document.getElementById('f2-res').textContent='Enter values above';return;} const va=((vt-vd)*rr/1000).toFixed(2); document.getElementById('f2-res').innerHTML=`VA = ${va} L/min (alveolar volume = ${vt-vd} mL per breath)`; }
-function calcCaO2(){ const hb=parseFloat(document.getElementById('f3-hb').value),sao2=parseFloat(document.getElementById('f3-sao2').value),pao2=parseFloat(document.getElementById('f3-pao2').value); if(isNaN(hb)||isNaN(sao2)||isNaN(pao2)){document.getElementById('f3-res').textContent='Enter values above';return;} const hbound=(hb*1.34*sao2).toFixed(2),diss=(pao2*0.003).toFixed(2),total=(parseFloat(hbound)+parseFloat(diss)).toFixed(2); document.getElementById('f3-res').innerHTML=`CaO₂ = ${total} mL/dL (Hb-bound: ${hbound} + dissolved: ${diss})`; }
-function calcPF(){ const pao2=parseFloat(document.getElementById('f4-pao2').value),fio2=parseFloat(document.getElementById('f4-fio2').value); if(isNaN(pao2)||isNaN(fio2)||fio2===0){document.getElementById('f4-res').textContent='Enter values above';return;} const pf=(pao2/fio2).toFixed(0); let interp=''; if(pf>350)interp='Normal'; else if(pf>=300)interp='Borderline'; else if(pf>=200)interp='Mild-moderate impairment'; else if(pf>=100)interp='Moderate-severe ARDS'; else interp='Severe ARDS'; document.getElementById('f4-res').innerHTML=`P/F = ${pf} — ${interp}`; }
-function calcPAO2(){ const co2=parseFloat(document.getElementById('f5-co2').value); if(isNaN(co2)){document.getElementById('f5-res').textContent='Enter values above';return;} const pao2=(150-(1.25*co2)).toFixed(1); document.getElementById('f5-res').innerHTML=`PAO₂ = ${pao2} mmHg (room air, sea level)`; }
-function calcPBW(){ const ht=parseFloat(document.getElementById('f6-ht').value),sex=document.getElementById('f6-sex').value; if(isNaN(ht)){document.getElementById('f6-res').textContent='Enter values above';return;} const base=sex==='m'?50:45.5,pbw=(base+2.3*(ht-60)).toFixed(1); const vt6=(pbw*6).toFixed(0),vt8=(pbw*8).toFixed(0); document.getElementById('f6-res').innerHTML=`PBW = ${pbw} kg → VT range: ${vt6}–${vt8} mL (6–8 mL/kg)`; }
-
-/* ════════════════════════════════════════════════
-   MATCHER
-════════════════════════════════════════════════ */
-let mSetIdx=0,mSelected={side:null,idx:null},mMatched={left:[],right:[]};
-function startMatcher(){ mSetIdx=0; showScreen('matcher-screen'); renderMatcher(); }
+function calcVE(){const r=+document.getElementById('f1r').value,v=+document.getElementById('f1v').value;if(!r||!v){document.getElementById('f1res').textContent='Enter values above';return}const ve=(r*v/1000).toFixed(2);const ok=ve>=5&&ve<=10;document.getElementById('f1res').innerHTML=`VE = ${ve} L/min ${ok?'&#10003; normal (5-10 L/min)':'&#9888; outside normal range (5-10 L/min)'}`}
+function calcVA(){const vt=+document.getElementById('f2vt').value,vd=+document.getElementById('f2vd').value,rr=+document.getElementById('f2rr').value;if(!vt||!rr){document.getElementById('f2res').textContent='Enter values above';return}const va=((vt-vd)*rr/1000).toFixed(2);document.getElementById('f2res').innerHTML=`VA = ${va} L/min (alveolar volume = ${vt-vd} mL/breath)`}
+function calcCaO2(){const h=+document.getElementById('f3h').value,s=+document.getElementById('f3s').value,p=+document.getElementById('f3p').value;if(!h||!s||!p){document.getElementById('f3res').textContent='Enter values above';return}const hb=(h*1.34*s).toFixed(2),dis=(p*0.003).toFixed(2),tot=(+hb+ +dis).toFixed(2);document.getElementById('f3res').innerHTML=`CaO2 = ${tot} mL/dL (Hb-bound: ${hb} + dissolved: ${dis})`}
+function calcPF(){const p=+document.getElementById('f4p').value,f=+document.getElementById('f4f').value;if(!p||!f){document.getElementById('f4res').textContent='Enter values above';return}const pf=(p/f).toFixed(0);const i=pf>350?'Normal':pf>=300?'Borderline':pf>=200?'Mild-moderate impairment':pf>=100?'Moderate-severe ARDS':'Severe ARDS';document.getElementById('f4res').innerHTML=`P/F = ${pf} -- ${i}`}
+function calcPAO2(){const c=+document.getElementById('f5c').value;if(!c){document.getElementById('f5res').textContent='Enter values above';return}document.getElementById('f5res').innerHTML=`PAO2 = ${(150-1.25*c).toFixed(1)} mmHg (room air, sea level)`}
+function calcPBW(){const h=+document.getElementById('f6h').value,s=document.getElementById('f6s').value;if(!h){document.getElementById('f6res').textContent='Enter values above';return}const base=s==='m'?50:45.5,pbw=(base+2.3*(h-60)).toFixed(1);document.getElementById('f6res').innerHTML=`PBW = ${pbw} kg &rarr; VT range: ${(pbw*6).toFixed(0)}-${(pbw*8).toFixed(0)} mL (6-8 mL/kg)`}
+ 
+/* ── MATCHER ── */
+let mSetIdx=0,mSel={side:null,idx:null},mMatched={left:[],right:[]};
+function startMatcher(){mSetIdx=0;showScreen('matcher-screen');renderMatcher()}
 function renderMatcher(){
   const set=MATCH_SETS[mSetIdx];
   const lefts=shuffle(set.pairs.map(p=>p.left));
   const rights=shuffle(set.pairs.map(p=>p.right));
-  window._matchPairs=set.pairs; window._matchLefts=lefts; window._matchRights=rights;
-  mSelected={side:null,idx:null}; mMatched={left:[],right:[]};
-  const lHTML=lefts.map((t,i)=>`<div class="match-item" id="ml-${i}" onclick="pickMatch('left',${i})">${t}</div>`).join('');
-  const rHTML=rights.map((t,i)=>`<div class="match-item" id="mr-${i}" onclick="pickMatch('right',${i})">${t}</div>`).join('');
-  document.getElementById('matcher-area').innerHTML=`<div style="font-size:13px;font-weight:600;color:var(--text);margin-bottom:10px;">${set.title}</div><div class="matcher-wrap"><div class="match-col">${lHTML}</div><div class="match-col">${rHTML}</div></div><div id="match-feedback" style="font-size:13px;color:var(--text2);min-height:20px;margin-bottom:12px;"></div><div id="match-done" style="display:none;"><p style="font-size:15px;font-weight:600;color:var(--teal);margin-bottom:12px;">All matched! ✓</p>${mSetIdx<MATCH_SETS.length-1?'<button class="btn btn-primary" onclick="nextMatchSet()">Next set →</button>':'<button class="btn btn-primary" onclick="startMatcher()">Try again</button>'} <button class="btn" onclick="goHome()" style="margin-left:8px;">Main menu</button></div>`;
+  window._mp=set.pairs;window._ml=lefts;window._mr=rights;
+  mSel={side:null,idx:null};mMatched={left:[],right:[]};
+  const lH=lefts.map((t,i)=>`<div class="match-item" id="ml-${i}" onclick="pickM('left',${i})">${t}</div>`).join('');
+  const rH=rights.map((t,i)=>`<div class="match-item" id="mr-${i}" onclick="pickM('right',${i})">${t}</div>`).join('');
+  document.getElementById('matcher-area').innerHTML=`<div style="font-size:13px;font-weight:600;margin-bottom:10px">${set.title}</div><div class="matcher-wrap"><div class="match-col">${lH}</div><div class="match-col">${rH}</div></div><div id="mfb" style="font-size:13px;color:var(--text2);min-height:20px;margin-bottom:12px"></div><div id="mdone" style="display:none"><p style="font-size:15px;font-weight:600;color:var(--teal);margin-bottom:12px">All matched! &#10003;</p>${mSetIdx<MATCH_SETS.length-1?'<button class="btn btn-primary" onclick="nextMatchSet()">Next set &rarr;</button>':'<button class="btn btn-primary" onclick="startMatcher()">Try again</button>'} <button class="btn" onclick="goHome()" style="margin-left:8px">Main menu</button></div>`;
 }
-function pickMatch(side,idx){
-  if(mMatched[side].includes(idx)) return;
-  if(mSelected.side===null){ mSelected={side,idx}; document.getElementById((side==='left'?'ml':'mr')+'-'+idx).classList.add('selected'); return; }
-  if(mSelected.side===side){ document.getElementById((mSelected.side==='left'?'ml':'mr')+'-'+mSelected.idx).classList.remove('selected'); mSelected={side,idx}; document.getElementById((side==='left'?'ml':'mr')+'-'+idx).classList.add('selected'); return; }
-  const lIdx=side==='right'?mSelected.idx:idx, rIdx=side==='right'?idx:mSelected.idx;
-  const lText=window._matchLefts[lIdx], rText=window._matchRights[rIdx];
-  const correct=window._matchPairs.some(p=>p.left===lText&&p.right===rText);
-  const lEl=document.getElementById('ml-'+lIdx), rEl=document.getElementById('mr-'+rIdx);
-  lEl.classList.remove('selected'); rEl.classList.remove('selected');
-  if(correct){ lEl.classList.add('matched-ok'); rEl.classList.add('matched-ok'); mMatched.left.push(lIdx); mMatched.right.push(rIdx); document.getElementById('match-feedback').textContent='Correct!'; if(mMatched.left.length===window._matchPairs.length) document.getElementById('match-done').style.display='block'; }
-  else { lEl.classList.add('matched-err'); rEl.classList.add('matched-err'); document.getElementById('match-feedback').textContent='Not a match — try again.'; setTimeout(()=>{ lEl.classList.remove('matched-err'); rEl.classList.remove('matched-err'); document.getElementById('match-feedback').textContent=''; },900); }
-  mSelected={side:null,idx:null};
+function pickM(side,idx){
+  if(mMatched[side].includes(idx))return;
+  if(mSel.side===null){mSel={side,idx};document.getElementById((side==='left'?'ml':'mr')+'-'+idx).classList.add('sel');return}
+  if(mSel.side===side){document.getElementById((mSel.side==='left'?'ml':'mr')+'-'+mSel.idx).classList.remove('sel');mSel={side,idx};document.getElementById((side==='left'?'ml':'mr')+'-'+idx).classList.add('sel');return}
+  const li=side==='right'?mSel.idx:idx,ri=side==='right'?idx:mSel.idx;
+  const ok=window._mp.some(p=>p.left===window._ml[li]&&p.right===window._mr[ri]);
+  const le=document.getElementById('ml-'+li),re=document.getElementById('mr-'+ri);
+  le.classList.remove('sel');re.classList.remove('sel');
+  if(ok){le.classList.add('mok');re.classList.add('mok');mMatched.left.push(li);mMatched.right.push(ri);document.getElementById('mfb').textContent='Correct!';if(mMatched.left.length===window._mp.length)document.getElementById('mdone').style.display='block'}
+  else{le.classList.add('merr');re.classList.add('merr');document.getElementById('mfb').textContent='Not a match -- try again.';setTimeout(()=>{le.classList.remove('merr');re.classList.remove('merr');document.getElementById('mfb').textContent=''},900)}
+  mSel={side:null,idx:null};
 }
-function nextMatchSet(){ mSetIdx++; renderMatcher(); }
-
-/* ════════════════════════════════════════════════
-   ABG INTERPRETER
-════════════════════════════════════════════════ */
-function startABG(){ showScreen('abg-screen'); }
+function nextMatchSet(){mSetIdx++;renderMatcher()}
+ 
+/* ── ABG INTERPRETER ── */
+function startABG(){showScreen('abg-screen')}
 function interpretABG(){
-  const ph=parseFloat(document.getElementById('abg-ph').value);
-  const co2=parseFloat(document.getElementById('abg-co2').value);
-  const hco3=parseFloat(document.getElementById('abg-hco3').value);
-  const pao2=parseFloat(document.getElementById('abg-pao2').value);
-  const fio2=parseFloat(document.getElementById('abg-fio2').value)||0.21;
-  const hb=parseFloat(document.getElementById('abg-hb').value);
-  if(isNaN(ph)||isNaN(co2)||isNaN(hco3)){ document.getElementById('abg-result').innerHTML=''; return; }
-  let steps=[], verdict='', vClass='';
-  // Step 1: pH
-  let phStatus=''; if(ph<7.35){phStatus='Acidemia';vClass='abg-acid';} else if(ph>7.45){phStatus='Alkalemia';vClass='abg-alk';} else{phStatus='Normal pH';vClass='abg-normal';}
-  steps.push(`<strong>Step 1 — pH ${ph}:</strong> ${phStatus}`);
-  // Step 2: CO2
-  let co2Note=''; if(co2>45&&ph<7.35)co2Note='→ Respiratory acidosis (hypoventilation)'; else if(co2<35&&ph>7.45)co2Note='→ Respiratory alkalosis (hyperventilation)'; else if(co2>45&&ph>7.45)co2Note='→ Elevated CO₂ compensating for metabolic alkalosis'; else if(co2<35&&ph<7.35)co2Note='→ Low CO₂ compensating for metabolic acidosis'; else co2Note='→ PaCO₂ within range';
-  steps.push(`<strong>Step 2 — PaCO₂ ${co2} mmHg:</strong> ${co2Note}`);
-  // Step 3: HCO3
-  let hco3Note=''; if(hco3<22&&ph<7.35)hco3Note='→ Metabolic acidosis'; else if(hco3>26&&ph>7.45)hco3Note='→ Metabolic alkalosis'; else if(hco3>26&&ph<7.35)hco3Note='→ Elevated HCO₃ compensating for respiratory acidosis'; else if(hco3<22&&ph>7.45)hco3Note='→ Low HCO₃ compensating for respiratory alkalosis'; else hco3Note='→ HCO₃ within range';
-  steps.push(`<strong>Step 3 — HCO₃⁻ ${hco3} mEq/L:</strong> ${hco3Note}`);
-  // Primary determination
-  let primary='Normal acid-base'; let hypoxNote='';
-  if(ph<7.35){ if(co2>45&&(hco3>=22&&hco3<=26))primary='Acute (uncompensated) respiratory acidosis'; else if(co2>45&&hco3>26)primary='Chronic compensated respiratory acidosis'; else if(hco3<22)primary='Metabolic acidosis'+(co2<35?' with respiratory compensation':''); }
-  else if(ph>7.45){ if(co2<35&&(hco3>=22&&hco3<=26))primary='Acute (uncompensated) respiratory alkalosis'; else if(co2<35&&hco3<22)primary='Chronic compensated respiratory alkalosis'; else if(hco3>26)primary='Metabolic alkalosis'+(co2>45?' with respiratory compensation':''); }
-  else primary='Compensated or normal';
-  // Step 4: oxygenation
-  let o2Note=''; let pfNote='';
-  if(!isNaN(pao2)){ if(pao2<80){hypoxNote=' with hypoxemia'; o2Note=`PaO₂ ${pao2} < 80 — hypoxemia present.`;} else o2Note=`PaO₂ ${pao2} — oxygenation adequate.`; }
-  if(!isNaN(pao2)&&!isNaN(fio2)){ const pf=(pao2/fio2).toFixed(0); let pfi=''; if(pf>350)pfi='Normal'; else if(pf>=300)pfi='Borderline'; else if(pf>=200)pfi='Mild-moderate impairment'; else if(pf>=100)pfi='Moderate-severe ARDS'; else pfi='Severe ARDS'; pfNote=`P/F ratio = ${pf} — ${pfi}.`; }
-  let caoNote=''; if(!isNaN(hb)&&!isNaN(pao2)){ const sao2=(!isNaN(pao2)&&pao2>=60)?0.96:0.88; const cao2=((hb*1.34*sao2)+(pao2*0.003)).toFixed(1); caoNote=`Estimated CaO₂ ≈ ${cao2} mL/dL.`; }
-  steps.push(`<strong>Step 4 — Oxygenation:</strong> ${o2Note||'(PaO₂ not entered)'} ${pfNote} ${caoNote}`);
-  verdict=primary+hypoxNote;
-  document.getElementById('abg-result').innerHTML=`<div class="abg-result"><div class="label">Interpretation</div><div class="verdict ${vClass}">${verdict}</div><div class="explain">${steps.join('<br><br>')}</div></div>`;
+  const ph=+document.getElementById('abg-ph').value;
+  const co2=+document.getElementById('abg-co2').value;
+  const hco3=+document.getElementById('abg-hco3').value;
+  const pao2v=document.getElementById('abg-pao2').value;
+  const fio2v=document.getElementById('abg-fio2').value;
+  const hbv=document.getElementById('abg-hb').value;
+  if(!ph||!co2||!hco3){document.getElementById('abg-result').innerHTML='';return}
+  const pao2=pao2v?+pao2v:NaN,fio2=fio2v?+fio2v:0.21,hb=hbv?+hbv:NaN;
+  let steps=[],vClass='';
+  const phS=ph<7.35?'Acidemia':ph>7.45?'Alkalemia':'Normal pH';
+  if(ph<7.35)vClass='c-acid';else if(ph>7.45)vClass='c-alk';else vClass='c-normal';
+  steps.push(`<strong>Step 1 - pH ${ph}:</strong> ${phS}`);
+  let co2N='';
+  if(co2>45&&ph<7.35)co2N='Respiratory acidosis (hypoventilation)';
+  else if(co2<35&&ph>7.45)co2N='Respiratory alkalosis (hyperventilation)';
+  else if(co2>45&&ph>=7.35)co2N='Elevated CO2 -- compensating for metabolic alkalosis or partially compensated';
+  else if(co2<35&&ph<=7.45)co2N='Low CO2 -- compensating for metabolic acidosis';
+  else co2N='PaCO2 within normal range';
+  steps.push(`<strong>Step 2 - PaCO2 ${co2} mmHg:</strong> ${co2N}`);
+  let hN='';
+  if(hco3<22&&ph<7.35)hN='Metabolic acidosis';
+  else if(hco3>26&&ph>7.45)hN='Metabolic alkalosis';
+  else if(hco3>26&&ph<7.35)hN='Elevated HCO3 -- compensating for respiratory acidosis (chronic)';
+  else if(hco3<22&&ph>7.45)hN='Low HCO3 -- compensating for respiratory alkalosis';
+  else hN='HCO3 within normal range';
+  steps.push(`<strong>Step 3 - HCO3- ${hco3} mEq/L:</strong> ${hN}`);
+  let primary='Normal acid-base',hypox='';
+  if(ph<7.35){
+    if(co2>45&&hco3>=22&&hco3<=26)primary='Acute (uncompensated) respiratory acidosis';
+    else if(co2>45&&hco3>26)primary='Chronic compensated respiratory acidosis';
+    else if(hco3<22)primary='Metabolic acidosis'+(co2<35?' with respiratory compensation':'');
+  }else if(ph>7.45){
+    if(co2<35&&hco3>=22&&hco3<=26)primary='Acute (uncompensated) respiratory alkalosis';
+    else if(co2<35&&hco3<22)primary='Chronic compensated respiratory alkalosis';
+    else if(hco3>26)primary='Metabolic alkalosis'+(co2>45?' with respiratory compensation':'');
+  }else primary='Compensated or normal';
+  let o2N='',pfN='',caoN='';
+  if(!isNaN(pao2)){if(pao2<80){hypox=' with hypoxemia';o2N=`PaO2 ${pao2} < 80 mmHg -- hypoxemia present.`}else o2N=`PaO2 ${pao2} mmHg -- oxygenation adequate.`}
+  if(!isNaN(pao2)&&fio2){const pf=(pao2/fio2).toFixed(0);const pi=pf>350?'Normal':pf>=300?'Borderline':pf>=200?'Mild-moderate impairment':pf>=100?'Moderate-severe ARDS':'Severe ARDS';pfN=` P/F = ${pf} -- ${pi}.`}
+  if(!isNaN(hb)&&!isNaN(pao2)){const s2=pao2>=60?0.96:0.88;caoN=` Est CaO2 = ${(hb*1.34*s2+pao2*0.003).toFixed(1)} mL/dL.`}
+  steps.push(`<strong>Step 4 - Oxygenation:</strong> ${o2N||'(PaO2 not entered)'}${pfN}${caoN}`);
+  document.getElementById('abg-result').innerHTML=`<div class="abg-result-box"><div class="abg-label">Interpretation</div><div class="abg-verdict ${vClass}">${primary}${hypox}</div><div class="abg-explain">${steps.join('<br><br>')}</div></div>`;
 }
-
-/* ════════════════════════════════════════════════
-   REFERENCE
-════════════════════════════════════════════════ */
-function showRef(){ document.getElementById('ref-grid').innerHTML=REF_DATA.map(r=>`<div class="vr-card ${r.cls}"><div class="vr-name">${r.name}</div><div class="vr-val">${r.val}</div></div>`).join(''); showScreen('ref-screen'); }
-
-/* ════════════════════════════════════════════════
-   VITAL SIGNS GUIDE
-════════════════════════════════════════════════ */
+ 
+/* ── REFERENCE ── */
+function showRef(){document.getElementById('ref-grid').innerHTML=REF_DATA.map(r=>`<div class="vr-card ${r.cls}"><div class="vr-name">${r.name}</div><div class="vr-val">${r.val}</div></div>`).join('');showScreen('ref-screen')}
+ 
+/* ── VITALS ── */
 function showVitals(){
-  document.getElementById('vitals-area').innerHTML=VITALS_DATA.map(v=>`
-  <div style="margin-bottom:16px;">
-    <table class="vs-table">
-      <thead><tr><th colspan="2">${v.param}</th></tr></thead>
-      <tbody>
-        <tr><td>Normal</td><td>${v.normal}</td></tr>
-        <tr><td>High / Fast</td><td>${v.high}</td></tr>
-        <tr><td>Low / Slow</td><td>${v.low}</td></tr>
-        <tr><td>Clinical notes</td><td>${v.notes}</td></tr>
-      </tbody>
-    </table>
-  </div>`).join('');
+  document.getElementById('vitals-area').innerHTML=VITALS_DATA.map(v=>`<div style="margin-bottom:16px"><table class="vs-table"><thead><tr><th colspan="2">${v.param}</th></tr></thead><tbody><tr><td>Normal</td><td>${v.normal}</td></tr><tr><td>High / Fast</td><td>${v.high}</td></tr><tr><td>Low / Slow</td><td>${v.low}</td></tr><tr><td>Clinical notes</td><td>${v.notes}</td></tr></tbody></table></div>`).join('');
   showScreen('vitals-screen');
 }
-
-/* ════════════════════════════════════════════════
-   STUDY TIPS
-════════════════════════════════════════════════ */
+ 
+/* ── TIPS ── */
 function showTips(){
-  document.getElementById('tips-area').innerHTML=TIPS.map(t=>`<div class="tip-card"><i class="${t.icon} tip-icon" aria-hidden="true"></i><div class="tip-title">${t.title}</div><div class="tip-body">${t.body}</div></div>`).join('');
+  document.getElementById('tips-area').innerHTML=TIPS.map(t=>`<div class="tip-card"><i class="${t.icon} tip-icon"></i><div class="tip-title">${t.title}</div><div class="tip-body">${t.body}</div></div>`).join('');
   showScreen('tips-screen');
 }
 </script>
